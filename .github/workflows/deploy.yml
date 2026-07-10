@@ -26,10 +26,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
@@ -45,6 +45,10 @@ jobs:
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
+        with:
+          # Auto-enable Pages (set to "GitHub Actions" source) if it isn't
+          # already, so the build no longer fails with "Get Pages site failed".
+          enablement: true
 
       - name: Upload the built site
         uses: actions/upload-pages-artifact@v3
