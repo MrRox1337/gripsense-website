@@ -1,0 +1,157 @@
+@import 'tailwindcss';
+
+/* ============================================================
+   BAUHAUS DESIGN SYSTEM  —  theme tokens
+   Off-white paper · ink black · pure primary accents.
+   Change these three accent hexes to re-skin the whole site.
+   ============================================================ */
+@theme {
+  --color-paper: #f7f4ec; /* warm off-white background            */
+  --color-paper-2: #efeadd; /* slightly dimmer panel background     */
+  --color-ink: #141414; /* near-black text / rules              */
+  --color-ink-soft: #4a4a4a; /* muted body text                      */
+
+  --color-red: #e4002b; /* Bauhaus primary — red                */
+  --color-blue: #005bbb; /* Bauhaus primary — blue               */
+  --color-yellow: #ffc400; /* Bauhaus primary — yellow             */
+
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+}
+
+/* ---------- base ---------- */
+html {
+  scroll-behavior: smooth;
+  /* keep anchored sections clear of the fixed top nav */
+  scroll-padding-top: 5.5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-yellow);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-blue);
+  outline-offset: 3px;
+}
+
+/* Thin, precise scrollbar in keeping with the grid aesthetic */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-paper-2);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-ink);
+}
+
+/* ---------- reusable Bauhaus helpers ---------- */
+
+/* eyebrow / section kicker label */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* thick black hairline used to divide sections */
+.rule-heavy {
+  border: 0;
+  border-top: 3px solid var(--color-ink);
+}
+
+/* underline reveal for links */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  transition: background-size 0.3s ease;
+}
+.link-underline:hover {
+  background-size: 100% 2px;
+}
+
+/* faint blueprint grid, applied to select panels */
+.grid-paper {
+  background-image:
+    linear-gradient(to right, rgba(20, 20, 20, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20, 20, 20, 0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* generated article typography */
+.prose-bauhaus p {
+  margin: 0 0 1.15rem;
+  line-height: 1.75;
+  color: var(--color-ink-soft);
+  font-size: 1.02rem;
+}
+.prose-bauhaus p:last-child {
+  margin-bottom: 0;
+}
+.prose-bauhaus strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+/* prettified BibTeX citation keys */
+.cite {
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  color: var(--color-blue);
+  border-bottom: 1px dotted var(--color-blue);
+  white-space: nowrap;
+}
+.cite .cite-year {
+  font-weight: 500;
+}
+
+/* entrance animation for on-scroll reveals */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.reveal {
+  opacity: 0;
+}
+.reveal.is-visible {
+  animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .reveal.is-visible {
+    animation: none;
+    opacity: 1;
+  }
+}

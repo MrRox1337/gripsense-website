@@ -1,0 +1,32 @@
+# ===========================================================================
+#  Git ignore rules for the Object-in-Hand Gripper website repo.
+#  The site only needs two folders to build:  website/  and  Progress/
+#  Everything ignored below is either auto-generated or personal dissertation
+#  working material that does NOT need to be published on the web.
+# ===========================================================================
+
+# --- Auto-generated / installed (never commit these) ---
+node_modules/
+website/node_modules/
+website/dist/
+*.log
+npm-debug.log*
+
+# --- OS junk ---
+.DS_Store
+Thumbs.db
+
+# --- Personal dissertation working files (kept private) ---
+# The signed declaration contains your handwritten signature, so it is
+# excluded by default. Delete a line below if you deliberately want to
+# publish that file in this repo.
+M00983641_Aman_DissertationDeclaration_signed.pdf
+M00983641_Aman_DissertationDeclaration_signed.docx
+M00983641_Aman_DissertationDeclaration.pdf
+PDE4435_report_pickerbot.pdf
+pickerbot_gripper.pod
+LaTeX Dissertation/
+
+# Note: Progress/ and website/ are intentionally NOT ignored — the site is
+# built from them. Bibliography files (citations.bib, weblinks.bib) are small
+# and harmless, so they are left in.

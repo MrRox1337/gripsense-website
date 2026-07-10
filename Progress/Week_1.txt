@@ -1,0 +1,31 @@
+My first exploration was WadaKentaro2017Pvhr, where the robot used vacuum suction
+to manipulate objects for pick-and-verify operations on everyday objects.
+While this is great for smooth surfaces where the suction cup can easily comply
+around and provide a leak-proof grip, microelectronic circuit modules have
+irregularities that make it impossible for efficient suction.
+
+My next exploration was ItoTakatoshi2022Vfcc, which used capillary force grippers to
+interact with components as the fluid complied around the irregularities and resulted
+in good suction for automating pick-place operations. The limiting factor of this 
+project is that it worked on components in the 0201 range and below. Larger components
+don't interact with capillary forces and with this block, it was time to pivot to 
+better alternatives. 
+
+At this point, I needed to figure out what kinds of grippers exist and how I can weigh
+each option well. _2020_types explored the different kinds of end effectors. Besides
+the vacuum grippers, there were options for pneumatic, hydraulic, and electric grippers.
+Hydraulic grippers are used for heavy duty manipulation so it will apply crushing forces
+to my scope of objects. Even if pneumatics apply weaker forces than the hydraulic grippers,
+they still risk the chance of damaging sensitive components. So my gripper actuation of
+choice is electric grippers.
+
+Well... electric grippers are further subclassified - Servo, DC, Stepper motors may be the
+actuation techniques, but the most important thing is the way the object is contacted.
+_2025_6 explores some commonly used electric grippers methods and defines their use cases.
+From the research, we have a choice between parallel, rotary electric, and wide electric
+grippers. 
+
+Considering that my object pool will be PCB, microcontrollers and SBC units at the widest,
+and sensors and actuators at the smallest dimensions, I will need to use a gripper that can
+default carry low polygon, solid, low-friction bodies. So my final decision is further 
+sorted into parallel and wide electric grippers.

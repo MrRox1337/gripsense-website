@@ -1,0 +1,28 @@
+This week, I decided to figure out which actuators and sensors combinations I can use that
+can give me the most sensor data without making the tooling too heavy. Since we are using
+electric actuation, I need to first begin with some simple options first.
+
+Servo motors like the MG996R, MG90S, SG90S use PWM for operation from a digital pin of a 
+microcontroller like arduino uno or ESP32. But they do not give any feedback response
+natively unless a 4th wire is soldered onto the internal circuit of the unit. This gives
+the positional response of the servo motor as well. 
+
+If I want position response then magnetic encoders also perform a good job at reading
+position values of a magnet which can be connected to the rotary axle of the dc motor
+inside the servo unit. The problem in this case lies in size increase which cannot be 
+easily accomodated in the servo housing, secondly, even if there is a snug fit, the magnet
+will experience friction due to the tight fit, causing errors in position value readings.
+
+Finally, I thought of using stepper motors. These things move extremely precisely allowing
+me to move the grippers minutely to apply gripping force without damaging the manipulated
+object. Unlike servos, stepper motors need an additional stepper motor driver and end stop
+buttons that provide motion range information. Without the end-stops, the position at which
+the system powers on is set as home state which would cause catastrophic failures. Initial
+decision was to choose among A4988, DRV8801, and TMC2209 motor drivers.
+
+I realized that the TMC2209 motor driver has sensorless homing, meaning, it has a backEMF sensor
+that can be used as an internal end-stop on the motor itself. This is when I realized that a
+combination of the TMC2209 and a motor encoder can provide extremely reliable "item-in-hand" 
+response using the backEMF generated from stopping early while closing and sensing the position 
+of the magnet from the encoder. This idea already existed in the SparkFun PD Stepper (ROB-30118),
+a back-mountable stepper driver module. This was an excellent start for my gripper model.

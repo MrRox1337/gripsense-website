@@ -1,0 +1,9 @@
+Today I discussed with Dr. Judhi, the topic of my project. I want to work on
+my existing project, the Picker-Bot, and deploy it in the real world as the current
+version only exists in simulation. One of the limiting factors of real world deployment
+is the elimination of the assumption that "the object will be in hand and out of it when
+the certain state is expected." To eliminate this, I decided to explore literature to 
+figure out what kinds of end-effectors exists and what was commonly used in literature
+to build end-effectors for pick-place tangible objects, ideally PCBs as my scope for 
+this end-effector is manipulating microelectronic circuit modules like microcontrollers,
+sensors, and actuators.

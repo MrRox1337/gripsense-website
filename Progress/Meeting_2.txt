@@ -1,0 +1,14 @@
+This week, I discussed the benefit of the PD stepper motor driver from Sparkfun and how
+it can provide the position feedback along with sensorless homing. Dr. Judhi recommended
+that I start exploring some gripper designs for this system as these motors are heavy and
+I need to ensure that the manipulator must be able to carry the end effector and the load
+within its payload limits. So now I needed to create a design that can house a small 
+NEMA17 stepper motor while also apply gear ratios to have reasonable torque amplification
+and balance it with the speed of gripping so that cycle time for each pick place is small.
+Dr. Judhi also mentioned something about backdriveability and I need to understand how it
+relates to grip feedback.
+
+Key topics to explore after the meeting:
+- Need a light design for a universal gripper
+- Balance torque and gripping speed
+- Backdrivability and grip feedback

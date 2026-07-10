@@ -1,0 +1,5 @@
+After the second meeting, I have a good direction on my design. To summarize, I need to 
+design and fabricate a light and fast acting gripper with decent gripping strength and
+sensitive response to objects in hand.
+
+//TODO MORE BODY DETAILS
