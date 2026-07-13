@@ -1,0 +1,10 @@
+Today's meeting gave my thesis the exact focus it was missing. I took the 3D printed model
+to Dr. Judhi today. He pointed out two things. Firstly he reminded me of what he said
+about keeping things simple and pointed to the complexity of the wide servo gripper. He
+mentioned that I need to weigh the cost of assembling this and the parallel gripper to the
+range of freedom provided by the components and the overall grip strength.
+
+I also informed him that my purchase has been delayed by a few weeks due to an unreliable
+supplier so he suggested I start working on my document and blog and start throwing up evidence
+on the blog while setting up the introduction and literature review of the paper. Dr. Judhi 
+recommended I focus on the reliability and complexity of each arm for a strong paper.

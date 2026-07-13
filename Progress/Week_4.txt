@@ -1,0 +1,10 @@
+After my 3rd meeting, I started by first finding the official documentation on the Dynamixel
+XM430-W210-T motor and downloaded the STEP files. When I uploaded it to OnShape, the parts
+loaded but their mates were not defined. I defined the mates and was able to extract all
+measurements for reference to build the gripper. 
+
+I started by making my wide servo grippers. I used a provided FeatureScript on OnShape that 
+can build good sprocket gears and built upon it to create the joints and links. After making
+the housing and building the full assembly, I did interference analysis and noticed that the
+maximum width of the item I can manipulate is about 30mm which is extremely small. This is
+an issue since my target objects include Arduino Unos and Raspberry Pi Single-Board Computers (SBC).

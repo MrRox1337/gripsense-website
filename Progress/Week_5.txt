@@ -1,0 +1,19 @@
+From my discussions with Dr. Judhi, I learned two things: firstly, the TCP is variable and
+I would need to create a mathematical formula to calculate the TCP based on the width of
+the manipulated object. Secondly, this is pretty complex and I haven't even created the 
+parallel gripper.
+
+I decided to put the TCP calculation to the side and focus on creating the second design,
+the parallel gripper. To build this, a core difference is that the gripper is not directly
+actuated by the servo, instead it is actuated by a rack-and-pinion assembly. I still 
+maintained backdrivability as the wide servo grippers so I still have the ability to sense 
+object in hand.
+
+I found a FeatureScript that creates the rack-and-pinion assembly and used the base model
+to create the full assembly on OnShape. Here I created special rails, along which the rack
+can slide whitout derailing. I also ensured there is plenty of space for the motor to be 
+mounted for the first design and added some ribs along the fingers to ensure internal
+structural strength.
+
+Before the week ended, I started the 3D print of this model as it looked good enough for the
+first iteration. 

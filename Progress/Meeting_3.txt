@@ -1,0 +1,15 @@
+I spoke to Dr. Judhi about the Dynamixel motors. These motors come in a variety of shapes
+and my choice is the XM430-W210-T module that comes with the Turtlebot Burger package from
+Robotis. These are addressable servo motors that work using half-duplex 3-wire setup and
+can be daisy-chained such that only one motor is used to connect to the base device. It 
+also came with in-built position encoder, current sensor, voltage sensor, and torque sensor.
+
+One of my challenges was how I can integrate it with my porject and Dr. Judhi recommended I 
+search for ways to directly interact with the servo from the computer. This is when I suggested
+the OpenCR board and U2D2 module but the limitation came from the OpenCR board since it cannot
+allow the user to directly control the servo, instead I would have to send serial messages to
+the development board which will then feed instructions to the motor.
+
+That's when he suggested that I stick with the simplest approach and focus on making a product
+that can be adopted easily. With such a constraint, the U2D2 was the only solution. I made the
+purchase right after the meeting for the U2D2 starter kit.

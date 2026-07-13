@@ -2,4 +2,23 @@ After the second meeting, I have a good direction on my design. To summarize, I 
 design and fabricate a light and fast acting gripper with decent gripping strength and
 sensitive response to objects in hand.
 
-//TODO MORE BODY DETAILS
+My first requirement is getting a good assembly with lead screws, NEMA17 stepper motors,
+PD stepper motor driver, and create the housing that is light enough to be universally
+accessible to manipulators with ability to carry a decent payload. During the assembly,
+I noticed a few issues. Using lead screws create extremely high gear ratios that can 
+enable a 0.4Nm torque stepper motor to apply forces orders higher than the datasheet.
+But this came with the cost of not being able to be backdrivable. This means that a 
+foreign entity cannot force the gripper open or control the NEMA17 actuator. Another 
+cost was the overall lead screw. To actuate an open or close on the gripper, I needed at
+least 50mm in addition to the length of the NEMA17 and PD stepper module. All combined, 
+the overall length of the end-effector is much larger making the TCP significantly 
+further from the final joint of the manipulator. And the final constrain, the sensorless
+homing of the TMC2209 module calculates backEMF generation. This means if the counter-
+rotation stall applied upon the jaws of the gripper is very slow, there is minimal backEMF
+which would erroneously be ignored by the system causing unexpected object release/slipage.
+
+The combination of these constraints resulted in a gripper that can't dynamically apply 
+grip strength, nor can it be a universal end-effector. I must pivot and find an in between
+that has good position feedback like that of an encoded stepper motor, high torque of a
+servo motor, and a current based position sensor. That's when I stumbled upon the Dynamixel
+series advanced continuous rotation servo motors. I should speak with Dr. Judhi about this!

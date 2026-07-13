@@ -1,0 +1,14 @@
+My meeting with Dr. Judhi was very useful. I spoke to him about the gripper design and its
+limitations. I mentioned that the maximum grip width is about 30mm and it isn't enough to
+grip items like the Raspberry Pi SBC or Arduino Uno by its sides. This is when he pointed
+out a critical oversight. 
+
+I assumed that the tool center point (TCP) of the end effector is consistent but in reality
+it is variable based on the width of the item I manipulate. To hold an object 1mm wide, the
+TCP is at the maximum extension but the TCP is a ~10mm behind this point when the object to 
+manipulate is 30mm wide. This would mean that a consistent TCP value will not work and I 
+need to develop a forumla that will internally adjust the TCP based on the object width.
+This added a layer of complexity that I did not expect on the software level but I can deal
+with it.
+
+... Or should I? Is there a simpler approach? Time to explore. 
