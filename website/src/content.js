@@ -103,6 +103,53 @@ const CURATED = {
     title: 'From Driver to Design',
     tags: ['PD Stepper', 'NEMA17', 'Backdrivability'],
   },
+  'week-4': {
+    title: 'Modelling the Wide Servo Gripper',
+    tags: ['Onshape CAD', 'Dynamixel', 'Interference analysis'],
+    figures: [
+      {
+        after: 1,
+        file: 'week-4-dynamixel-onshape.jpg',
+        caption:
+          'Dynamixel XM430-W210-T STEP model imported into Onshape, with mates redefined to extract reference dimensions.',
+      },
+      {
+        after: 2,
+        file: 'week-4-wide-gripper.jpg',
+        caption:
+          'The wide servo gripper assembly — interference analysis exposes a maximum grip width of only ~30 mm.',
+      },
+    ],
+  },
+  'week-5': {
+    title: 'Pivoting to the Parallel Gripper',
+    tags: ['Parallel gripper', 'Rack & pinion', '3D printing'],
+    figures: [
+      {
+        after: 3,
+        file: 'week-5-parallel-gripper.jpg',
+        caption:
+          'Parallel gripper built on a rack-and-pinion with custom anti-derail rails and ribbed fingers — backdrivability retained for in-hand sensing.',
+      },
+      {
+        after: 4,
+        file: 'week-5-first-print.jpg',
+        caption: 'The first iteration of the parallel gripper going onto the 3D printer.',
+      },
+    ],
+  },
+  'meeting-3': {
+    title: 'Settling on Smart Servos',
+    tags: ['Dynamixel XM430', 'U2D2', 'Actuation'],
+  },
+  'meeting-4': {
+    title: 'The Moving Tool-Centre-Point',
+    tags: ['Variable TCP', 'Grip width', 'Kinematics'],
+  },
+  'meeting-5': {
+    title: 'Finding the Thesis Focus',
+    tags: ['Design trade-offs', 'Documentation', 'Lit review'],
+  },
 }
 
 /* ---------------------------------------------------------------------------
