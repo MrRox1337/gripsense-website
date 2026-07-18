@@ -197,6 +197,47 @@ export function formatInline(text) {
    --------------------------------------------------------------------------- */
 const pad2 = (n) => String(n).padStart(2, '0')
 
+/* ---------------------------------------------------------------------------
+   Dates — derived from the schedule, not hand-entered.
+   Week 1 begins Monday 8 June 2026; every week is a Mon–Sun span and every
+   supervision meeting happens on that week's Thursday. Change WEEK1_MONDAY
+   below if the timetable ever shifts, and all dates recompute.
+   --------------------------------------------------------------------------- */
+const WEEK1_MONDAY = Date.UTC(2026, 5, 8) // months are 0-indexed: 5 = June
+const DAY_MS = 24 * 60 * 60 * 1000
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
+const isoOf = (d) => d.toISOString().slice(0, 10)
+
+// Monday (start) of week N.
+function weekStart(n) {
+  return new Date(WEEK1_MONDAY + (n - 1) * 7 * DAY_MS)
+}
+
+// A week's Mon–Sun span, e.g. "8–14 Jun 2026" or "29 Jun – 5 Jul 2026".
+function weekSpanLabel(n) {
+  const start = weekStart(n)
+  const end = new Date(start.getTime() + 6 * DAY_MS)
+  const y = end.getUTCFullYear()
+  if (start.getUTCMonth() === end.getUTCMonth()) {
+    return `${start.getUTCDate()}–${end.getUTCDate()} ${MONTHS[start.getUTCMonth()]} ${y}`
+  }
+  return (
+    `${start.getUTCDate()} ${MONTHS[start.getUTCMonth()]} – ` +
+    `${end.getUTCDate()} ${MONTHS[end.getUTCMonth()]} ${y}`
+  )
+}
+
+// The Thursday of week N (meeting day), e.g. "Thu 11 Jun 2026".
+function meetingDay(n) {
+  return new Date(weekStart(n).getTime() + 3 * DAY_MS)
+}
+function meetingDayLabel(n) {
+  const d = meetingDay(n)
+  return `${WEEKDAYS[d.getUTCDay()]} ${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`
+}
+
 function parseBlocks(text) {
   const blocks = []
   const rawBlocks = text
@@ -300,6 +341,10 @@ function parseFile(path, raw) {
 
   if (type === 'week') blocks = injectFigures(blocks, id, title)
 
+  // Human-readable date + machine-readable ISO for the <time> element.
+  const dateLabel = type === 'week' ? weekSpanLabel(number) : meetingDayLabel(number)
+  const dateISO = type === 'week' ? isoOf(weekStart(number)) : isoOf(meetingDay(number))
+
   return {
     id,
     type,
@@ -309,6 +354,8 @@ function parseFile(path, raw) {
     tags,
     isDraft,
     blocks,
+    dateLabel,
+    dateISO,
     excerpt: excerptFrom(blocks),
     readingTime: readingTime(blocks),
   }
@@ -332,5 +379,5 @@ export const meetings = allPosts
 export const stats = {
   weeks: weekPosts.length,
   meetings: meetings.length,
-  totalWeeks: 12, // dissertation runs to Week 12
+  totalWeeks: 7, // progress log spans 7 weeks (Week 1 begins 8 Jun 2026)
 }

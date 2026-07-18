@@ -33,10 +33,16 @@ import { supervisor } from '../data/site.js'
           <span class="h-4 w-4 border-2 border-ink bg-yellow"></span>
         </span>
 
-        <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <span class="font-mono text-xs font-semibold uppercase tracking-widest text-ink-soft">
             {{ m.label }}
           </span>
+          <time
+            :datetime="m.dateISO"
+            class="font-mono text-xs font-semibold uppercase tracking-widest text-red"
+          >
+            {{ m.dateLabel }}
+          </time>
           <span class="h-px flex-1 bg-ink/15"></span>
         </div>
 

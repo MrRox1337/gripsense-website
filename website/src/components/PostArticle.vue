@@ -40,6 +40,9 @@ const visibleBlocks = computed(() =>
           {{ String(post.number).padStart(2, '0') }}
         </div>
         <div class="mt-3 kicker text-ink-soft">{{ post.label }}</div>
+        <time :datetime="post.dateISO" class="mt-1 block font-mono text-xs text-ink">
+          {{ post.dateLabel }}
+        </time>
         <div class="mt-1 font-mono text-xs text-ink-soft">
           {{ post.readingTime }} min read
         </div>

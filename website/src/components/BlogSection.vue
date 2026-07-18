@@ -2,7 +2,7 @@
 import { reactive, onMounted, onBeforeUnmount } from 'vue'
 import SectionHeader from './SectionHeader.vue'
 import PostArticle from './PostArticle.vue'
-import { weekPosts } from '../content.js'
+import { weekPosts, stats } from '../content.js'
 
 // Track which entries are expanded.
 const expanded = reactive({})
@@ -47,12 +47,12 @@ onBeforeUnmount(() => window.removeEventListener('hashchange', expandFromHash))
       </div>
 
       <p
-        v-if="weekPosts.length < 12"
+        v-if="weekPosts.length < stats.totalWeeks"
         class="mt-16 border-2 border-dashed border-ink/30 bg-paper p-5 text-center font-mono text-xs text-ink-soft"
       >
-        Weeks {{ String(weekPosts.length + 1).padStart(2, '0') }}–12 will appear here
-        automatically as <span class="text-ink">Week_N.txt</span> files are added to the
-        Progress folder.
+        Weeks {{ String(weekPosts.length + 1).padStart(2, '0') }}–{{ stats.totalWeeks }} will
+        appear here automatically as <span class="text-ink">Week_N.txt</span> files are added
+        to the Progress folder.
       </p>
     </div>
   </section>

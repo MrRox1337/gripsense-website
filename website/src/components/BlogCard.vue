@@ -44,6 +44,13 @@ const isYellow = accent === 'bg-yellow'
         >
       </h3>
 
+      <time
+        :datetime="post.dateISO"
+        class="mt-2 block font-mono text-[0.68rem] uppercase tracking-widest text-ink-soft"
+      >
+        {{ post.dateLabel }}
+      </time>
+
       <p class="mt-3 flex-1 text-sm leading-relaxed text-ink-soft">
         {{ post.excerpt }}
       </p>
