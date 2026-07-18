@@ -6,7 +6,7 @@ relies on the truth of the torque-current-voltage-efficiency graph provided by R
 the XM430-W210-T actuator. He suggested I look into pneumatic sensors, tensional sensors,
 and any other means that come precalibrated instead of force resistive sensors or load cells.
 
-So my key takeaways for the weeks
+So here are my key takeaways for the week:
 - Optimize enclosure
 - Test actuator
 - Explore evaluation metrics
