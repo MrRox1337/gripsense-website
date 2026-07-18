@@ -379,5 +379,6 @@ export const meetings = allPosts
 export const stats = {
   weeks: weekPosts.length,
   meetings: meetings.length,
-  totalWeeks: 7, // progress log spans 7 weeks (Week 1 begins 8 Jun 2026)
+  // Planned length is 12 weeks; grows automatically if the log ever runs longer.
+  totalWeeks: Math.max(12, weekPosts.length),
 }
