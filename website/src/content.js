@@ -150,6 +150,10 @@ const CURATED = {
     title: 'Finding the Thesis Focus',
     tags: ['Design trade-offs', 'Documentation', 'Lit review'],
   },
+  'meeting-6': {
+    title: 'Measuring the Grip',
+    tags: ['Enclosure design', 'Grip evaluation', 'Sensor selection'],
+  },
 }
 
 /* ---------------------------------------------------------------------------

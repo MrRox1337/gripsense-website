@@ -1,0 +1,12 @@
+I presented the first version of my model to Dr. Judhi today. He observed that the actuator
+has mounted inside the enclosure from two sides alone and mentioned I optimize the enclosure
+soon so I can get started with the software development when the U2D2 kit arrives. He also 
+suggested I start looking into the grip evaluation testing units. My current method only
+relies on the truth of the torque-current-voltage-efficiency graph provided by ROBOTIS for 
+the XM430-W210-T actuator. He suggested I look into pneumatic sensors, tensional sensors,
+and any other means that come precalibrated instead of force resistive sensors or load cells.
+
+So my key takeaways for the weeks
+- Optimize enclosure
+- Test actuator
+- Explore evaluation metrics
