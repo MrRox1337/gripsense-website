@@ -52,14 +52,14 @@ export const files = [
     key: "onshape",
     title: "Onshape CAD Document",
     desc: "The live, parametric CAD assembly.",
-    url: "#",
+    url: "https://cad.onshape.com/documents/26ae62bdc068d3a1a757a32c/w/bd8636f8197cb10e6369b7c2/e/67a251683f5a185aeeb3ceee?renderMode=0&uiState=6a6dece1a4b76ae5157c6445",
     accent: "blue",
   },
   {
     key: "report",
     title: "Dissertation Report",
     desc: "Written report repository (LaTeX).",
-    url: "#",
+    url: "https://www.overleaf.com/read/fqxmxhshbhdr#3005a3",
     accent: "yellow",
   },
   {
