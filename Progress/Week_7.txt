@@ -1,0 +1,20 @@
+After my 7th meeting, I was happy to proceed to designing the full end-of-arm tooling.
+The U2D2 module arrived on time so I began testing the Dynamixel actuator. I noticed
+that by applying varying limits, I can clamp the maximum range, velocity, and torque.
+And by doing so, I could continue to get the full motion of GripSense while not harming
+the gripping fingers or the object I manipulate.
+
+With the Current-based position sensor method, I tested the grip strength at the weakest
+current limit below which the actuator will fail to operate the fingers. The gripper 
+applied about 850 grams of gripping strength measured on the strain gauge kitchen scale.
+At a current limit over 130 resolution units, I snapped one of the fingers due to excessive
+forces applied by a higher torque limit. At 120 units, I was able to apply about 1.5 Kg of
+gripping strength.
+
+So I decided to range between the minimum operable current limit of 90 resolution units to
+a maximum of 120 units for testing GripSense. But this was only because I used Transparent
+PETG filament to make the fingers. I decided to see what would happen if I make fingers of
+different material as my evaluation metrics for the quality and robustness of GripSense.
+
+With that in mind, I started prints for more fingers made from PETG, PLA, ABS, and TPU and
+I will present the idea to Dr. Judhi to get his input.

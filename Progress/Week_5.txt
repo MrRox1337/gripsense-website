@@ -1,7 +1,7 @@
-From my discussions with Dr. Judhi, I learned two things: firstly, the TCP is variable and
-I would need to create a mathematical formula to calculate the TCP based on the width of
-the manipulated object. Secondly, this is pretty complex and I haven't even created the 
-parallel gripper.
+From my discussions with Dr. Judhi in the 4th meeting, I learned two things: firstly,
+the TCP is variable and I would need to create a mathematical formula to calculate the
+TCP based on the width of the manipulated object. Secondly, this is pretty complex and
+I haven't even created the parallel gripper.
 
 I decided to put the TCP calculation to the side and focus on creating the second design,
 the parallel gripper. To build this, a core difference is that the gripper is not directly

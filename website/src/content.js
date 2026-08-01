@@ -154,6 +154,61 @@ const CURATED = {
     title: 'Measuring the Grip',
     tags: ['Enclosure design', 'Grip evaluation', 'Sensor selection'],
   },
+  'week-6': {
+    title: 'A Kitchen Scale for Grip Strength',
+    tags: ['Enclosure v2', 'Strain gauge', 'Dynamixel Wizard'],
+    figures: [
+      {
+        after: 1,
+        file: 'week-6-enclosure-v2.jpg',
+        caption:
+          'Version 2 of the rack-and-pinion enclosure, modelled around the XM430-W210-T actuator.',
+      },
+      {
+        after: 3,
+        file: 'week-6-strain-gauge.jpg',
+        caption:
+          'A kitchen weight scale — a ready-made strain gauge — repurposed as the grip-strength evaluation rig.',
+      },
+    ],
+  },
+  'week-7': {
+    title: 'Testing GripSense to Failure',
+    tags: ['U2D2 testing', 'Grip strength', 'Filament trials'],
+    figures: [
+      {
+        after: 2,
+        file: 'week-7-grip-test.jpg',
+        caption:
+          'Current-limited grip-strength testing on the scale — up to ~1.5 kg before a PETG finger snapped.',
+      },
+      {
+        after: 4,
+        file: 'week-7-material-fingers.jpg',
+        caption: 'Fingers printed in PETG, PLA, ABS and TPU for a material-robustness comparison.',
+      },
+    ],
+  },
+  'week-8': {
+    title: 'Mounting GripSense to the VT6',
+    tags: ['Enclosure v3', 'Epson VT6', 'EoAT mounting'],
+    figures: [
+      {
+        after: 2,
+        file: 'week-8-vt6-mounted.jpg',
+        caption:
+          'The third and final enclosure, printed in PLA and mounted on the Epson VT6-A901S — ready for data collection.',
+      },
+    ],
+  },
+  'meeting-7': {
+    title: 'A Metric Under Scrutiny',
+    tags: ['Evaluation metric', 'Custom script', 'End-of-arm tooling'],
+  },
+  'meeting-8': {
+    title: 'Stop Designing, Start Collecting',
+    tags: ['Data collection', 'Reliability', 'Focus'],
+  },
 }
 
 /* ---------------------------------------------------------------------------
@@ -245,25 +300,39 @@ function parseBlocks(text) {
     .map((b) => b.trim())
     .filter(Boolean)
 
+  const isBullet = (l) => /^[-*•]\s+/.test(l)
+  const stripBullet = (l) => l.replace(/^[-*•]\s+/, '')
+
   for (const b of rawBlocks) {
     const lines = b
       .split('\n')
       .map((l) => l.trim())
       .filter(Boolean)
-    const isBullet = (l) => /^[-*•]\s+/.test(l)
-    const bullets = lines.filter(isBullet)
 
-    if (bullets.length && bullets.length === lines.length) {
-      blocks.push({ kind: 'list', items: bullets.map((l) => l.replace(/^[-*•]\s+/, '')) })
-    } else if (bullets.length) {
-      // Mixed block: a lead-in line followed by bullets (e.g. "Key topics:\n- …")
-      const lead = lines.filter((l) => !isBullet(l)).join(' ')
-      if (lead) blocks.push({ kind: 'para', text: lead })
-      blocks.push({ kind: 'list', items: bullets.map((l) => l.replace(/^[-*•]\s+/, '')) })
-    } else {
-      // Ordinary paragraph — re-flow the hard-wrapped source lines.
+    const firstBullet = lines.findIndex(isBullet)
+
+    // No bullets at all -> a single re-flowed paragraph.
+    if (firstBullet === -1) {
       blocks.push({ kind: 'para', text: lines.join(' ') })
+      continue
     }
+
+    // Any lines before the first bullet form a lead-in paragraph
+    // (e.g. "Key topics:" ahead of the list).
+    const lead = lines.slice(0, firstBullet).join(' ').trim()
+    if (lead) blocks.push({ kind: 'para', text: lead })
+
+    // Build list items, folding hard-wrapped continuation lines into the
+    // preceding bullet so multi-line bullets stay intact.
+    const items = []
+    for (const line of lines.slice(firstBullet)) {
+      if (isBullet(line)) {
+        items.push(stripBullet(line))
+      } else if (items.length) {
+        items[items.length - 1] += ' ' + line
+      }
+    }
+    blocks.push({ kind: 'list', items })
   }
   return blocks
 }

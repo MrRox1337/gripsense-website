@@ -1,0 +1,6 @@
+I met Dr. Judhi at the start of this week. Honestly it was the best decision. There 
+is so much to do and the direction I need to go is much clear. Dr. Judhi explained
+that I need to focus on gathering as much data as possible to showcase the 
+reliability of GripSense. He mentioned I've been spending too much time deciding
+on the design and less on the hardware itself so I should wrap it up soon by mounting
+it on the Epson and start gather collecting data.

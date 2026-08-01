@@ -1,1 +1,26 @@
-// TODO
+From my 6th meeting with Dr. Judhi, I decided to continue the work on the enclosure.
+I began by first using the 3D model of the XM430-W210-T actuator and design around
+it to make the new rack and pinion enclosure. Fortunately, it was only a matter of 
+a few extrudes, cuts, fillets, and chamfers to make a viable version 2 of the gripper
+enclosure.
+
+After 3D printing and testing the slider performance, I finally mounted the actuator
+onto the gripper with screws and moved onto researching evaluation metrics. I thought
+of a few approaches. The most intuitive method would be to use a Force Sensitive
+Resistor (FSR) but they don't come with calibrated values; if the object in contact 
+has a limited surface area smaller than the FSR, then I can't even get true values.
+
+So with precalibration in mind and the requirement of being able to measure weight
+differences in grams, the most reliable method would be to use a strain gauge. An 
+everyday item that uses strain gauge for gram-level accuracy would be a kitchen weight
+scale so I decided to use this for my grip strength evaluation.
+
+With the enclosure optimized and evaluation metrics decided, I need to start working
+on the code that can help me test the Dynamixel actuator. I first found that it is 
+very easy to use the Dynamixel Wizard 2.0 for identifying the actuator and tune its 
+internal details like limits for voltage, temperature, current, position, torque, and
+velocity while also change details like ID, baud rate, and control method and also
+evaluate motion based on velocity, position, current, and torque. 
+
+Now it is only a matter of the U2D2 module to arrive. Until then I should at least build
+a power supply for the actuator since the XM430-W210-T module works at 11.1V.

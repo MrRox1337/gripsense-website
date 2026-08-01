@@ -1,0 +1,19 @@
+Okay so the meeting confirmed what I was feeling. I need to move on from design and 
+begin the data collection stage already. With the guidelines for the week, I started
+making the new gripper mount. But during the process I realized that the fingers at
+maximum grip also reveal their rack beyond the enclosure. So I need to make the
+enclosure wider. In addition, the screw mounts I designed to affix the actuator was 
+excessive and two were misaligned as well. So in my third and final edition of the
+enclosure, I did the following:
+- Added chamfers to the slots to make it easier to slip the actuator into the slots
+- Removed the misaligned screw points as they were also excessive
+- Added cutouts for the serial wires to passthrough since the actuator will be surrounded
+in all dierctions
+- Added slots for ease of accessibility to the actuator in case of when replacement
+is needed.
+- Added M4 screw mounts to affix the GripSense to the existing End-of-arm Tooling
+that is already mounted on the VT6 since it has adequate space for accessory mounts.
+
+I 3D printed the enclosure with PLA this time and finally mounted it to the VT6. The
+GripSense is ready to collect data! I just need to start the code now. Amazing
+progression honestly.

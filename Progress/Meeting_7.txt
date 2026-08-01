@@ -1,0 +1,15 @@
+I took the newly designed, printed, and assembled GripSense V2 to Dr. Judhi and presented
+the new evaluation metric idea as well. He still has doubts on whether this should be the
+accepted standard so the only way to find out will be by testing the performance when the
+U2D2 module arrives; which should be by this Friday.
+
+His suggestion is that while the Dynamixel Wizard 2.0 can help identify and communicate 
+the actuator, I should start working on creating a custom script that can help test the 
+performance within the gripper's limits.
+
+He also recommended I get started with designing the full end-of-arm-tooling which included
+accounting for space where accessories can be safely mounted and routed through the provided
+central ring on the Epson VT6-A901S.
+
+Dr. Judhi recommended I get started with the report and add the introduction, literature
+review, and methodology if the U2D2 module doesn't arrive by this week.
