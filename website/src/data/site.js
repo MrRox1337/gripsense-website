@@ -38,14 +38,14 @@ export const files = [
     key: "github",
     title: "Project GitHub Repository",
     desc: "Source code, firmware and hardware notes.",
-    url: "#",
+    url: "https://github.com/MrRox1337/GripSense",
     accent: "ink",
   },
   {
     key: "stl",
     title: "STL Files",
     desc: "Printable gripper parts on Printables.",
-    url: "#",
+    url: "https://www.printables.com/model/1802484-dynamixel-parallel-gripper",
     accent: "red",
   },
   {
