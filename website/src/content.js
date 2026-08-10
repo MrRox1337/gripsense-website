@@ -209,6 +209,34 @@ const CURATED = {
     title: 'Stop Designing, Start Collecting',
     tags: ['Data collection', 'Reliability', 'Focus'],
   },
+  'week-9': {
+    title: 'Automating the Grip-and-Slip Benchmark',
+    tags: ['Dynamixel SDK', 'Benchmark GUI', 'Slip detection', 'Calibration'],
+    figures: [
+      {
+        after: 5,
+        file: 'week-9-control-gui.jpg',
+        caption:
+          'The manual control GUI — position, goal-current and profile-velocity sliders that prime the gripper to maximum open before the first torque command.',
+      },
+      {
+        after: 10,
+        file: 'week-9-benchmark-gui.jpg',
+        caption:
+          'The benchmark GUI presents the trials as a 4×4 grid that locks out completed material×padding combinations and reports overall progress.',
+      },
+      {
+        after: 22,
+        file: 'week-9-architecture.jpg',
+        caption:
+          'The software architecture, documented with Mermaid diagrams: control flow, data flow, the run-time threading model, the calibration sequence and the slip-decision rule.',
+      },
+    ],
+  },
+  'meeting-9': {
+    title: 'Force Closure Before Padding',
+    tags: ['Preliminary results', 'Force closure', 'Material ranking'],
+  },
 }
 
 /* ---------------------------------------------------------------------------

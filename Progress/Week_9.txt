@@ -1,0 +1,166 @@
+After my 8th meeting with Dr. Judhi, I have decided to move on from the design phase
+and enter the testing phase. I decided to make the python scripts that would operate
+the end-effector manually and also benchmark the various force closure the gripper
+and padding combinations.
+
+This was a very challenging week. I had to create two configuration files, one which
+defines the servo control table and another that defines the gripper configuration.
+The control table contained the addresses, lengths, values, and units needed to convert
+desired outcome into an acceptable Dynamixel actuator input format. The gripper
+configuration file contained the port, id, baud rate, and limits for position, current,
+and velocity.
+
+After that, I created a wrapper script that simplified Protocol 2.0 communication with
+the dynamixel actuator for current based position control and ensured IO operations 
+were not run concurrently.
+
+Then I created a file called gripper_settings.py that resolved the paths of all the 
+files in my project such that the dynamixel_gripper library stays layout-agnostic and
+the newer scripts can get their data from here and not re-deriving them from config files,
+thus, minimizing redundancy.
+
+Finally, I created the first operation script, the gripper_control_ui and gripper_control_gui,
+that provided position, goal current, and profile velocity sliders to manually control
+the gripper. It started with setting torque to disable and prime the gripper to maximum
+open position such that the first torque does not begin from a stale target, ie, no
+movement is detected in this open/close operation erroneously.
+
+With the manual operations set, I tested the script and everything worked great. I could
+open and close the gripper and set various force values and test the gripper's performance
+on a testing scale ranging from 0-5000g. With that said, it was time to begin the developing
+the benchmarking script.
+
+I started by analysing that I need to test grip and slip for 4 finger material and 4
+padding types. This meant I needed about 4*4*5 runs and considering one reading per run
+can't give accurate values, probing at least 3 times per run would mean I would need
+4*4*5*3 runs for  both grip and slip test, resulting in about 480 runs. I decided to make
+the matrix and storage scripts that would handle data collection and recording such that
+if I were to abort a run and return, I don't have to start from scratch and instead continue
+from where I left off.
+
+Then I made a runner script that would probe a finger for every padding combination, opening
+three times per level, and prompt the user to input the measured weight or sense slippage.
+
+Then I started developing the qualitative analysis script, the report builder, which would 
+produce one table covering N, mean, SD, min, median, max, range, and coefficient of variation
+for all 80 cells. The script also contained a grip force against current limit by material, 
+and by padding, plus mean force and repeatability heatmaps and a ranking chart. I labelled 
+every current axis in both raw units and mA as well.
+
+That said, I moved onto creating the benchmark GUI and entrypoint. Here I wanted to present
+the test as a 4x4 grid that locks out completed combinations and shows overall progress. I
+further ensured that torque enabled only during the run and disabled it on completion, or 
+abort, or an error. Upon each probe, I am prompting the user to enter the scale reading 
+measured by eye, to measure not the spiked value but the stabilized value. Once each value
+is entered, it gets appended to a CSV file. I also enabled a --report flag on startup and
+in the GUI to generate the report manually or automatically once all 16 combinations are
+competed.
+
+I then used Claude to help me create a highly detailed documentation for the script explaining
+the repo organization, structure, experiment design, hardware requirements, and setup. I
+defined the domain vocabulary and covered both application, ie, testing and benchmark, in
+the readme.
+
+I later realized that in my gripper_config.yaml, I have not created calibration and slip
+detection configuations so I went ahead and made those. I added a calibration block which
+uses a set probe  current and velocity, a stall rule that decides whether the closure to
+zero is met, and a safety back-off to prevent the fingers from accidentally snapping. In
+the slip block, I added a sampling interval, how the holding current baseline is established,
+and a drop threshold that counts as a lost grip. Finally, I demoted the default maximum
+open and travel degree to a fallback value if I ran the scripts before the fingers were
+calibrated.
+
+Finally in the calibration sequence, I added a two-step travel-limit calibration to the
+driver. The finger geometry changes when a printed finger is swapped, so the open and close
+positions need to be measured on the hardware instead of stored as constant/false truths. I
+begin by setting the torque to disable and then manually setting the fingers to maximum open
+value. Then I find the closed limit by driving the fingers shut under a current limit and
+watching for present current staying high WHILE the position stops changing. This was because
+the current alone spikes on the initial acceleration and would call the stop immediately.
+This was very hard to debug as I didn't think of real world physics. The fingers would then
+back off by a few ticks to become the minimum open position and finally reopen to finish before
+dropping torque safely.
+
+Finally, with the grip test done, another category, the slip test is still remaining so I began
+developing this code. I named the two tests and their labels so the UI and storage can access
+them. Then I added a slip-detection column set, keeping the detection time separate from the
+flag that reports actual slippage observation. Then I ensured the file appends went into the
+appropriate test category such that the completion helpers work on either dataset as needed.
+
+I then created a motion script that extracted the open and close motion into a base class with
+the same settle rules. The only thing that differes is what is measured on their arrival to
+settle. This script uses a plain constructor to hold the motion limits and prevents motion if
+no limits have been set rather than using an older travel window that belongs to incorrect
+fingers.
+
+I then created a slip script for slip detection by present-current collapse as recommended
+ROBOTIS. A gripped object holds the fingers stalled and the servo near its goal current. When
+the object is pulled free, the fingers are unopposed and present current falls shaprly, which
+is the basis of slip. For this, we require the fall to clear both a proportional and an absolute
+margin, so a firm grip must drop proportionally far while a weak one must stil drop a real amount.
+I also added the time the slip took to FIRST dropped sample rather than the one confirmed as the
+confirmation delay is a property of the detector and not of the gripper. Considering I am measuring
+current, I ensured only to read this in the watcher loop as a position read costs a second read
+which would half the sampling rate, affecting the resolution of the very number this test exists
+to measure. And finally, I recorded a timeout honestly as not detected, with no detection time.
+
+I then created calibration_ui and dialogs scripts to minimize redundancy. I added highly redundant
+abort checks. When a simple software bugs out, it results in errors and overflows but hardware
+crashes need real safety checks to prevent injury to humans. So constant abort checks and access 
+to the command makes the system safer. I also implemented a calibration steps and file writes 
+wherever necessary, only triggering after the user enters a value and accepts. This would allow 
+me to simply retry a test if the probe was obstructed.
+
+I went ahead and adjusted the calibration limit resolution in settings and control_ui by listening
+to defined calibration limmits instead of constants. For this I made a persistent configuration in
+the gripper_limits.yaml and read it back. Then I had the travel_limits report whether the values
+are calibrated or not, and renae the config-derived constants to NOMINAL_ to make the fallback
+very apparent at every usage point. I then exposed the calibration and slip usage blocks and the
+slip resuts path for code accessibility, and derived the manual control GUI's position slider
+limits from those limits. To ensure apparent fallback, I mentioned it in red-text on the GUI.
+
+I finally updated the report script to report slip detection alongside grip force. This included
+detection rate over all repeats, with the timing statistics computed only over the repeats where
+a slip was seen, since a timeout contributes no time to average. Then I added three figures:
+detection time by finger material, and heatmaps of detection rate and mean detection time. At this
+point, all my work was on a hope and a prayer so I created a compute script which would generate
+the report even with partial data. And finally, for data clarity, I added dashes in cells with no
+data instead of the default "NaN" results.
+
+I finally updated the runner and ui scripts to run both tests and calibration from the benchmark
+GUI. This moves the grip-force runner onto the shared motion base and rebuilds the window around
+a test selector, so the two sequences are interchangeable from the UI's point of view. I added
+the calibration panel, tracked completion per test, shared one abort across both runners, dropped
+re-zero which guessed MAX OPEN from wherever the previous session ended and used calibrated values
+instead, and further optimized the files such that report generation is headless and doesn't need
+to run GUI or import its packages. Then I modified the top layer gripper_benchmark entrypoint to 
+include slip_results.csv when rebuilding the report the with --report flag.
+
+Considering the project is hosted on GitHub, I needed to identify what needed to be rememberd and
+ignored. I kept the gripper_limits in version control despite being written by the wizard as it
+records which set of fingers the commited results were taken with, so a change to it is a part
+of the finger swap rather than noise. I also extended the experiment-output note to cover
+slip_results.csv.
+
+I then updated the readme file to document calibration, slip detection, and software architecture.
+This was very hard as I needed to make visuals using mermaid for the entire project. I added a 
+software architecture section with five mermaid diagrams: control flow, data flow, the threading
+model during a run, the calibration sequence, and the slip decision rule. I gave the layer table
+the rule that each layer obeys, including the honest exception that the manual GUI's sliders do
+command the servo directly. I also added notes on the calibration wizard and the slip test end to
+end, and added the slip results CSV schema and the new report outputs. I also extended the
+definitions with calibration, hard stop, back-off, hold current, detection time, and detection
+rate. Finally, I updated the FAQ for uncalibrated limits, a probe that finds no stop or stops early,
+and a slip that is never or instantly detected. I also added correct headless examples, which still
+called the removed rezero and travel_ticks API.
+
+When I deployed the page to GitHub Pages, I realized the mermaid didn't render so I tried fixing it
+with Claude but later found that the Jekyll engine ignores output from third party rendering engines
+like that of mermaid, which still works on the standalone github.com/MrRox1337/GripSense repo page.
+Turns out GitHub did not follow up on their promise to fix this from years ago. This is quite
+unfortunate as my deployed page now looks slightly unprofessional. sad_face_emoji 😔
+
+With that, I think I can wrap up what is possibly the heaviest week of the entire 12 week development
+period. I might have to use up more weeks but it depends on what is needed from the outcomes of this
+code next week. Let's check the work I've done with Dr. Judhi and I'll know which direction I need
+to go after here.

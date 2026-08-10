@@ -1,0 +1,29 @@
+The meeting this week was online. It was mainly through messaging and correspondences.
+I wanted to give Dr. Judhi an update on the codebase but without concrete evidence of
+execution, I could not show anything. So I decided to get some initial test done and
+evaluate some combinations for slip and grip test.
+
+I ran the tests for all finger materials at no padding and rubberband padding. My 
+first observation was at calibration where both PETG and PLA had a delay after pulling
+back at minimum open to return to maximum open. I also noticed that TPU had the fastest
+calibration compared to all the hard materials. During data collection, I suspected TPU
+to be the best performer at grabbing components but PLA was the best at no paddin
+followed by PETG, TPU, and finally ABS. ABS failed at the first test of closure due to
+delamination but I also suspect that it is not a controlled test since this filament
+was printed on another device making the fabrication environment inconsistent compared
+to the other materials.
+
+PLA filament is extremely hard, yet brittle, but this permitted the gripper to apply 
+maximum closing force at the end-effector TCP and TPU had the most inconsistent 
+readings for slip test for the same reasons.
+
+When I reported these initial findings to Dr. Judhi, he funnily commented that I pushed
+myself very hard this week and I should take a break (hehe). He mentioned that testing
+the grip quality using different material and pads is the best move but if I am comparing
+the strength of the pinch of different materials (often called Force Closure in robotics),
+I need to test the pinches without padding, then choose the best material, and finally do
+padding based grip quality check.
+
+I still believe I can make some meaningful discoveries if I continue collecting all 480
+datapoints and create inferences from the results. But ultimately, I will find out after
+discovering the results. Let us see in the upcoming weeks what happens.
