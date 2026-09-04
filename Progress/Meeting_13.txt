@@ -1,0 +1,23 @@
+Today's meeting was in person, since Dr. Judhi finally returned to office as the new
+semester started. Following up on what he asked me to do last time, I went and found two
+papers with genuinely related work, Falco2020Benchmarking and Shang2026FORTE, and did some
+proper exploration around them.
+
+That exploration is what made me realise my paper as it stands is actually two papers in
+one trenchcoat, and that I have veered away from the path of just building a good gripper
+with a good API for anyone to use. The two papers hiding inside mine look something like:
+"A self-contained, middleware-free control interface for Dynamixel-actuated parallel
+grippers that exposes normalised position and grip-strength commands together with
+proprioceptive grasp-state feedback," and "How much slip-detection performance is available
+from actuator proprioception alone, with zero added sensing, and how does it vary across
+printable finger materials and passive padding?"
+
+When I put this to Dr. Judhi, he agreed I am pulling in two separate directions and that I
+need to actually decide whether I pivot toward the benchmarking question or stick with the
+control-interface development. I wrapped the meeting up by telling him I want to continue
+with the control-interface development and set the material/padding benchmarking aside for
+now. So going forward I am treating PLA fingers with rubber-band padding as my working
+choice, with an explicit constraint attached: this is an anecdotal choice, not a derived
+one, and a proper independent study of finger material and padding choice belongs to future
+work. He was fine with that and asked me to reframe my proposal around this decision and
+send him the details as soon as I can.

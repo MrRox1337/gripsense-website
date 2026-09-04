@@ -237,6 +237,80 @@ const CURATED = {
     title: 'Force Closure Before Padding',
     tags: ['Preliminary results', 'Force closure', 'Material ranking'],
   },
+  'week-10': {
+    title: 'Running the Benchmark, Confronting the Slip Detector',
+    tags: ['Force closure', 'Slip detection', 'Benchmark rig'],
+    figures: [
+      {
+        after: 2,
+        file: 'week-10-test-object.jpg',
+        caption:
+          'A 40mm PCB ruler chosen as the standard test object: it fits every finger set’s calibrated travel and has a flat, rigid edge, at the cost of conditioning every reading on a single geometry.',
+      },
+      {
+        after: 7,
+        file: 'week-10-slip-detector.jpg',
+        caption:
+          'The slip detector after three rounds of hardening: a 20-sample settled baseline, a three-sample confirmation window timestamped to the first drop, and a guard against a degenerate threshold going silent.',
+      },
+    ],
+  },
+  'week-11': {
+    title: 'Recovering, Not Building',
+    tags: ['Recovery', 'Pause'],
+  },
+  'meeting-10': {
+    title: 'Skipping With Nothing to Show',
+    tags: ['Skipped meeting', 'Recovery'],
+  },
+  'meeting-11': {
+    title: 'A Second Missed Meeting',
+    tags: ['Skipped meeting', 'Recovery'],
+  },
+  'week-12': {
+    title: 'Turning Scripts Into a GripperAPI',
+    tags: ['GripperAPI', 'Refactor', 'Bug fix'],
+    figures: [
+      {
+        after: 2,
+        file: 'week-12-api-surface.jpg',
+        caption:
+          'The abstracted GripperAPI surface: enable, open/close/hold, and a polled status — idle, moving, ok, slip, or miss — hiding the control tables and register addresses beneath it.',
+      },
+      {
+        after: 5,
+        file: 'week-12-third-party-test.jpg',
+        caption:
+          'A third-party import test: someone outside the project initialised the API against the config, limits and control-table YAML files and operated the gripper without reading the driver code.',
+      },
+    ],
+  },
+  'meeting-12': {
+    title: 'What Is This Paper Actually About?',
+    tags: ['Picker-Bot', 'Scope check', 'Grip & slip metrics'],
+  },
+  'week-13': {
+    title: 'Chasing the Last Data Points, Fighting ABS',
+    tags: ['benchmark_params.yaml', 'Recalibration', 'ABS failures'],
+    figures: [
+      {
+        after: 2,
+        file: 'week-13-benchmark-yaml.jpg',
+        caption:
+          'The experiment matrix lifted into a single benchmark_params.yaml — materials, paddings, current levels and repeat count, redefinable without touching code.',
+      },
+      {
+        after: 4,
+        file: 'week-13-abs-failure.jpg',
+        caption:
+          'The ABS finger set after its third collapse mid data-collection — superglued back together each time before finally giving out on the eraser-padding cell.',
+      },
+    ],
+  },
+  'meeting-13': {
+    title: 'Two Papers in One Trenchcoat',
+    tags: ['Pivot decision', 'Related work', 'Scope commitment'],
+  },
 }
 
 /* ---------------------------------------------------------------------------

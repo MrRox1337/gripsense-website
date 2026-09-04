@@ -1,0 +1,70 @@
+With the software written and Dr. Judhi's advice from the last meeting in hand, this
+week was about actually running the thing. The plan was simple on paper: start with no
+padding across all four finger materials so I get a clean force closure comparison
+first, and only then move on to the padding combinations for grip quality. Simple on
+paper.
+
+The first thing I had to settle was what I would actually be gripping. I went with a
+40mm PCB ruler because it sits comfortably inside the calibrated travel of every finger
+set, it has a flat parallel edge like the boards GripSense is eventually meant to
+handle, and it is rigid enough that it does not deform under the closing force and add
+another variable. The obvious downside is that every number I collect from here is
+conditioned on this one geometry, so I noted it down as a limitation rather than
+pretending otherwise. A populated FR4 board with components on it will not behave the
+same way.
+
+Then I settled on the actual grip force procedure, and I am glad I thought it through
+before collecting rather than after. The fingers close directly onto the kitchen scale
+under a fixed current ceiling, squeezing its strain gauge, and I read the display after
+it settles. There is no pulling involved in this test at all. That matters because it
+means friction between the finger face and the object plays no part in the number — I
+am reading the contact force the actuator delivers to the fingers at that current
+ceiling, not a holding or pull-out force. I had to be careful to name it that way
+everywhere from the start, because a contact force and a pull-out force are not
+interchangeable and I did not want to find myself comparing against the wrong numbers
+in the literature later.
+
+While collecting, I also noticed a few things about the instrument that I could not fix
+but should record. I am reading the stabilized value by eye rather than the spike, and
+I never characterised how the scale's own platform deflects under load, which could
+matter more for the compliant TPU fingers than the rigid ones. Neither of these
+invalidate the comparison between cells since they apply equally to every cell, but
+they set a floor on how precise any single reading can be.
+
+The slip detector needed real work once it met real data. My first version took a
+single current reading as the holding baseline, which turned out to be far too fragile
+because the present current jitters even when the fingers are dead still against an
+object. I changed the baseline to the median of twenty samples taken after a one second
+settle, which gave me a number that actually represented the hold instead of whatever
+the servo happened to report at that instant.
+
+The second problem was false fires. A single dropped sample was enough to declare a
+slip, and at roughly 200 Hz there are plenty of single samples that dip below the
+threshold without the object going anywhere. So I required three consecutive dropped
+samples before confirming. But I kept timestamping the FIRST of those three rather than
+the confirming one, for the same reason as before: the two extra samples are the
+detector being careful, and that delay belongs to the detector, not to the gripper.
+
+The third problem was the quiet one. If a grip is weak enough, the holding current sits
+so low that the drop threshold falls below what the servo can even report, and the
+detector would simply never fire while looking perfectly healthy from the outside. That
+is the worst kind of bug because it produces a plausible looking timeout instead of an
+error. So I added a guard that checks whether the computed threshold is degenerate and
+reports it as such, rather than letting the run quietly record a non-detection.
+
+The last realisation of the week was about the detection time column itself. I start
+the watcher, then I reach over and pull the object. So the number I am recording is the
+gap between arming the watch and the current collapsing, which contains my own reaction
+time and however long the pull took, and only at the very end the actual detector
+latency. That is not the same thing as latency from slip onset, which is what the
+papers quote in the hundred millisecond range. I am recording it honestly as what it is
+and I will have to be careful never to put my numbers next to theirs as if they
+measured the same thing. Fixing it properly would mean sampling position alongside
+current in the watch loop and defining onset as the first position deviation past the
+settle tolerance, which is a bigger change than I want to make in the middle of a
+collection run.
+
+So the week ended with the rig running and the first real rows in the CSV, which after
+all those weeks of CAD and code is a genuinely good feeling. The detector is behaving,
+the procedure is repeatable, and I finally have numbers instead of intentions. Now I
+just have to keep grinding through the matrix.

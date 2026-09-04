@@ -1,0 +1,29 @@
+In my 12th meeting with Dr. Judhi, I was confronted with the two directions that I am taking
+my paper. It is clear that I veered off my main path of creating a parallel gripper and into
+making a detailed analysis on the best combination of finger and padding. I will only focus
+on the gripper and the API moving forward. But I have already started the benchmark testing
+and I have only a few data-points to collect. So I might as well collect it and then move 
+forward to optimizing the gripper API, testing after optimizations, and finally wrapping up
+my report. The benchmark tests pushed me back several weeks and now I have to rush to complete
+the rest!
+
+With the API abstracted and the driver split into proper modules, I went back to actually
+running the campaign. The experiment design was still hardcoded across a few scripts, so I
+lifted it into a single `benchmark_params.yaml`. The materials, paddings, current levels,
+and repeat count all live there now, which means I can redefine the matrix without touching
+a line of code. Since the fingers had been through calibration, refits, and a module reshuffle
+since I last zeroed them, I ran a fresh recalibration on the whole set before trusting any new
+numbers against the old ones.
+
+Data collection picked back up from there: rubber-band padding for PLA, PETG, and TPU, and
+more of the grip test for ABS.
+
+And ABS is where the week actually went sideways. The ABS fingers are mad annoying. They have
+collapsed on me three separate times now, and every time I have just superglued them back
+together and kept going rather than reprinting from scratch. This time it finally gave out
+mid data collection, right in the middle of the eraser padding cell, which meant throwing away
+whatever partial reading I had for that run. At this point I am genuinely debating whether to
+just abandon the ABS exploration rather than keep fighting a finger set that cannot survive
+its own test matrix. It is one thing for a material to perform badly and another for it to
+physically fall apart under me, and I am not sure the second one is telling me anything useful
+about grip quality.

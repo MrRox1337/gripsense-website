@@ -1,0 +1,21 @@
+Today's meeting was for a parallel conversation about the Picker-Bot paper I wrote
+before starting this thesis, a prior simulation-only stage of the overall product my
+research partner and I plan to keep developing beyond MSc Robotics. That paper's submission
+is in two days, so I skipped the GripSense conversation with Dr. Judhi to prioritise it.
+
+In that conversation we discussed pulling in additional papers on past related work by
+other academics and using them to identify gaps in the literature and strengthen the
+paper before submission.
+
+I still caught Dr. Judhi separately later on to walk him through the GripSense data. I
+discussed all the data I had collected and showed him every figure I had generated, which
+at this point was really a quantitative analysis of the gripper's finger-skeleton and
+sleeve-padding combinations to find the best performer. He stopped me partway through and
+asked what my actual intention with the paper was: am I trying to build a gripper, or am I
+doing a quantitative analysis of gripper fingers? He pointed out these are two separate
+things and that I seemed to be getting confused about which one this paper is actually
+about. He told me to go look at a few related papers and try to identify the gaps I could
+be solving instead. He also pushed me to define, concretely, how I plan to read grip
+quality and slip quality. For grip quality I said I would evaluate power transmission,
+range of grip strength, and resolution of grip strength; for slip quality I said I would
+evaluate binary slip/non-slip detection by hand.
