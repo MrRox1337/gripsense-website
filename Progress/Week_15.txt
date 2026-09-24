@@ -1,0 +1,37 @@
+This week I finally collected real data on the API. Before running anything I added a
+"Replot from CSV" option to the demo GUI, which reads a saved run back through the same
+reader the writer uses and redraws the figure. It also validates the header before parsing,
+so picking the wrong file names itself instead of failing halfway through. This turned out
+to be the right thing to do first, because it meant a bad plot no longer cost me a rerun on
+the hardware. I could fix the plotting and redraw from the same CSV.
+
+The status accuracy test staged a grip 120 times, 40 each for ok, miss, and slip, and
+counted how often the reported verdict matched what the trial was set up to produce. All
+120 came back correct with zero misclassifications. I am happy with that but I am not going
+to oversell it. It is one XM430, one set of printed fingers, and me staging every single
+trial by hand, so it says the classification logic is sound and not much more than that. I
+also built the confusion matrix to give an unexpected verdict like idle its own column
+rather than binning it as "other", so a wrong answer would have been visible instead of
+absorbed.
+
+The opening linearity test steps the jaws from 5% to 100% of calibrated travel in 5% steps
+through set_position(), always ascending so every point meets the same side of any backlash,
+and I take a caliper reading at each stop. I ran four sweeps, which is 80 readings. While
+checking the data I found one reading at sweep 4's 75% step that said 49.44mm while its
+neighbours at 70% and 80% were both in the high eighties. That was obviously me typing the
+wrong number and not a real deflection, so I corrected it to 89.44mm and re-rendered both
+figures from the fixed CSV. The regression on the corrected data came out to actual% =
+0.9973 * set% + 0.268 with an R squared of 0.9999 and a mean deviation of +0.12pp. There is
+a +0.7pp bias at the 5% level that shows up in all four sweeps in the same direction, which
+I am reading as backlash taking up slack at the smallest commanded opening rather than
+noise, since noise would not repeat that consistently. I would rather name it in the report
+than pretend it is not there.
+
+One annoying thing along the way was that the demo GUI's control panel ran taller than my
+864px screen and could not be resized around it, so I could not reach the bottom controls. I
+fixed it by moving the log into its own column with grid weights so the log absorbs the
+resize slack instead of the controls getting squeezed.
+
+I will take the testing plan to Dr. Judhi and confirm what else needs measuring before I can
+call the hardware work done. After that there is not much left to build, so I expect to
+start on the final writeup soon.

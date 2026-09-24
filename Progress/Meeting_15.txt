@@ -1,0 +1,11 @@
+I spoke with Dr. Judhi about the new ways to collect data. Since I decided to focus on just
+creating a gripper with an API attached, what I need to test now is the reliability of the
+watchdog and the normalized systems, not the finger materials anymore.
+
+So I confirmed with him if I should run 40 tests of grip, slip, and miss each, and do an
+incremental position check of normalized positional values from 5% opening to maximum and
+expand stepwise. He gave me the all-clear on both.
+
+With that, I have a plan set and I know what I need to do to wrap up with hardware and
+testing. I believe I am just a few steps away from wrapping up now. Soon I shall switch to
+thesis writing.

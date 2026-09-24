@@ -1,0 +1,58 @@
+After my 14th meeting with Dr. Judhi, I went ahead and branched the repository like he
+suggested. Everything that measures finger material and padding performance moved to the
+benchmarking branch: the matrix, the runner, the slip sequence, the calibration wizard UI,
+the dialogs, the report generation, and all the collected data. The branch forks from the
+same commit main forked from, so nothing was lost and the full history plus every
+measurement I have taken is still there. Main now carries only the control software.
+
+Doing the split made it clear how much of main had only ever existed to serve the
+benchmark. The one file genuinely shared between both halves was gripper_settings.py, so
+instead of moving it I split it, keeping the port, unit, and limits resolution that the GUI
+and API actually needed. Then I rewrote the readme around the control software alone and
+renamed gripper_control_gui.py to gripsense_teleop.py since the old name no longer
+described what it was.
+
+With that out of the way I started on what Dr. Judhi asked for. I added
+GripperAPI.calibrate() so calibration can run headless, without needing a dialog, and moved
+save_limits into the config module so the wizard and the API write an identical file
+instead of each deciding the format themselves. I also added calibrate_if_missing to
+from_config(), which runs that same calibration at construction time but only when no
+usable limits file is found. I kept it off by default so nothing changes for a caller who
+already has limits.
+
+The other two things Dr. Judhi asked for turned out to already be in the API from when I
+built it back in week 12, which I only realised when I went to add them. The watchdog he
+described is the background monitor thread that was already there, sampling current alone at
+the slip rate while the gripper is holding and standing down whenever a blocking move owns
+the bus, which is exactly what makes api.status cost no bus round trip to read. The slip
+state already latched too, because once an object escapes the fingers keep closing and the
+state would otherwise re-classify as miss, meaning a caller polling at 10 Hz could watch an
+object escape and never see it. And the direct device access was already exposed, since the
+register-level driver is its own module and the package exports it alongside the normalized
+surface rather than hiding it underneath. So there was nothing to build here. It was a good
+sign that he asked for the three things I had already decided were necessary, but I should
+have told him they existed in the meeting itself instead of nodding along and going home to
+check.
+
+Then I moved the manual console into the package as api.teleop(). It had been sitting in
+Lib and reaching into gripper_settings for its paths, units, and limits, which meant it only
+ran inside this repository. It now takes a live GripperAPI instead, so anyone who installs
+dynamixel_gripper can open the sliders on the API object they already hold. To make that
+work I had to expose velocity_min, velocity_max, and velocity_unit_rev on the API alongside
+the current bounds it already resolved. The calibration wizard followed it in, rebuilt over
+calibrate() so the API stays the only thing that knows how to apply and save limits. After
+all that, gripper_settings.py had no callers left, so I deleted it.
+
+Finally I tidied the package. I found the settle rule, which decides whether a move has
+finished, implemented twice: once in move_and_settle and again inline in the monitor thread.
+I pulled it into settle.py shaped exactly like slipwatch.py beside it, pure arithmetic over
+a stream of samples with no I/O, which means it can be exercised on a list of positions
+instead of needing a servo. I also noticed the driver's eight register methods were the same
+seven lines with one word changed, so they
+now go through a shared _write and _read. One thing I had to be careful about was masking,
+which I deliberately left at each call site instead of moving it into _write, because a
+blanket mask would turn a negative profile velocity from a packet error into a maximum
+speed command. That would have been a nasty one to find on hardware.
+
+Next week I need to actually collect data on this API and find out whether the status
+reporting and the normalized positions hold up.

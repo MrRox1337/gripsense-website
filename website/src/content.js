@@ -311,6 +311,68 @@ const CURATED = {
     title: 'Two Papers in One Trenchcoat',
     tags: ['Pivot decision', 'Related work', 'Scope commitment'],
   },
+  'week-14': {
+    title: 'Splitting the Repository, Hardening the API',
+    tags: ['Branch split', 'Watchdog thread', 'Package refactor'],
+    figures: [
+      {
+        after: 1,
+        file: 'week-14-branch-split.jpg',
+        caption:
+          'The benchmarking campaign forked onto its own branch from the shared commit — nothing lost, but `main` now builds toward the control software alone.',
+      },
+      {
+        after: 4,
+        file: 'week-14-watchdog.jpg',
+        caption:
+          'The watchdog Dr. Judhi asked for: a background monitor sampling current at the slip rate while holding, standing down for blocking moves, so reading the status costs no bus round trip.',
+      },
+      {
+        after: 5,
+        file: 'week-14-teleop-console.jpg',
+        caption:
+          'The manual console after moving inside the package as `api.teleop()` — sliders and calibration wizard now ship to anyone who installs `dynamixel_gripper`.',
+      },
+    ],
+  },
+  'week-15': {
+    title: 'The First Numbers Worth Reporting',
+    tags: ['Status accuracy', 'Opening linearity', 'Paper drafting'],
+    figures: [
+      {
+        after: 2,
+        file: 'week-15-status-matrix.jpg',
+        caption:
+          'Status-accuracy confusion matrix: 120 trials, 40 each of ok, miss and slip, with no misclassifications — strong evidence for the classification logic, on a single hardware unit.',
+      },
+      {
+        after: 3,
+        file: 'week-15-opening-linearity.jpg',
+        caption:
+          'Caliper readings scattered against commanded opening after the mis-recorded 75% point was corrected — near-perfect tracking, with a small repeatable backlash bias at the smallest opening.',
+      },
+    ],
+  },
+  'week-16': {
+    title: 'Switching to the Writeup',
+    tags: ['Paper draft', 'Requirements', 'Actuation selection'],
+    figures: [
+      {
+        after: 3,
+        file: 'week-16-actuation-table.jpg',
+        caption:
+          'The Actuation Comparison table — actuator classes transposed to rows so the elimination argument fits a single IEEE column instead of spanning both.',
+      },
+    ],
+  },
+  'meeting-14': {
+    title: 'Branch It, Normalize It, Watch It',
+    tags: ['Scope commitment', 'API design', 'Watchdog'],
+  },
+  'meeting-15': {
+    title: 'A Test Plan, Agreed',
+    tags: ['Test plan', 'Validation', 'Wrapping up'],
+  },
 }
 
 /* ---------------------------------------------------------------------------

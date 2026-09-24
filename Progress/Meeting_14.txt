@@ -1,0 +1,12 @@
+I told Dr. Judhi that I plan to develop just the API with the control layer and perform
+testing of the API's reliability. This meant a lot of changes are expected in the project
+since much of what exists right now was built for the benchmarking campaign.
+
+He suggested that I simply branch my repository instead of losing on the previous work
+done. That way I can halt research in that direction and resume material selection when
+the thesis is done.
+
+He then guided me to ensure that my API is normalized and that there is a way to directly
+access the device beyond the API translation to ensure similar performance. In addition,
+he said there must be a parallel watchdog that can provide the status of the grip so that
+instead of polling, I can just peek at this watchdog and know what is going on.

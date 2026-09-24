@@ -1,0 +1,33 @@
+With the test plan confirmed and real numbers in hand, this week I switched over to the
+final writeup. I restructured the paper into Methodology, split into Mechanical Design and
+Control Software, with a merged Discussion and a proper Testing and Results section instead
+of the placeholder that had been sitting there.
+
+I then split the requirements into two groups. The functional ones cover grasp and release,
+bounded force, object-in-hand, slip, and status reporting. The non-functional ones cover
+force safety, no added distal sensor, backdrivability, standard integration, and software
+portability. I labelled them FR-i to FR-v and NR-i to NR-v using my own shorthand rather
+than some generated numbering scheme, since I need to be able to point at them from memory
+in the viva.
+
+Then I wrote the Smart Servo Selection section as an argument by elimination. Actuators with
+no feedback fail outright. Actuators with position-only feedback, like encoded DC motors,
+steppers, and hobby servos, sense nothing usable for grasp state and also run their current
+uncontrolled at nominal-or-stall with no torque bound, which is a safety problem as much as
+a sensing one. From there the argument narrows to current-based position control in general
+and then to the XM430-W210-T specifically, on gear train durability, headroom below its
+current ceiling, and its built-in thermal, velocity, position, and current protection that
+works independent of whatever my driver software does. I also transposed the Actuation
+Comparison table so the actuator classes are rows instead of columns, which lets it fit in a
+single IEEE column rather than spanning both.
+
+The last thing I did was cut Picker-Bot down from five name-drops to one citation.
+Everywhere else the requirements now derive from the application domain itself, meaning
+rigid low-friction educational circuit modules, rather than from "Picker-Bot needs X". This
+makes the paper read as its own contribution with one clearly cited piece of prior work
+instead of a Picker-Bot appendix. While doing this I caught a real bug where a second
+mention of Shang et al. had the author name written in prose but no cite key behind it,
+which would have rendered as a bare name with no IEEE citation number.
+
+Next I need to write the Testing and Results section properly from the data I collected,
+since right now the numbers exist but the section does not.
