@@ -93,7 +93,7 @@ import { weekPosts, meetings, stats } from '../content.js'
 
           <div class="mt-6 space-y-1 border-t-2 border-ink pt-4 font-mono text-xs text-ink-soft">
             <p>
-              <span class="text-ink">Author</span> · {{ author.name }} ({{ author.studentId }})
+              <span class="text-ink">Author</span> · {{ author.name }}
             </p>
             <p><span class="text-ink">Supervisor</span> · {{ supervisor.name }}</p>
             <p><span class="text-ink">Institution</span> · {{ author.university }}</p>

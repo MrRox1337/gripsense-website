@@ -1,6 +1,7 @@
 <script setup>
 import SectionHeader from './SectionHeader.vue'
 import BauhausMark from './BauhausMark.vue'
+import PortraitBlock from './PortraitBlock.vue'
 import { reveal as vReveal } from '../directives/reveal.js'
 import { author, supervisor } from '../data/site.js'
 </script>
@@ -9,26 +10,26 @@ import { author, supervisor } from '../data/site.js'
   <section id="about" class="mx-auto max-w-7xl px-5 py-20 sm:px-8 md:py-28">
     <SectionHeader index="01" kicker="Who / With whom" title="About" accent="blue" />
 
-    <div class="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
+    <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
       <!-- author -->
-      <div v-reveal>
-        <div class="flex items-center gap-4">
-          <div class="flex h-14 w-14 items-center justify-center border-2 border-ink bg-yellow">
-            <span class="font-display text-2xl font-bold text-ink">{{
-              author.name.charAt(0)
-            }}</span>
-          </div>
+      <article v-reveal>
+        <div class="flex flex-col gap-6 sm:flex-row sm:items-end">
+          <PortraitBlock :file="author.photo" :alt="author.name" accent="yellow" />
           <div>
-            <h3 class="font-display text-2xl font-bold tracking-tight text-ink">
+            <span class="kicker text-ink-soft">Author</span>
+            <h3 class="mt-2 font-display text-2xl font-bold tracking-tight text-ink sm:text-3xl">
               {{ author.name }}
             </h3>
-            <p class="font-mono text-xs uppercase tracking-widest text-ink-soft">
-              {{ author.role }} · {{ author.studentId }}
+            <p class="mt-1 font-mono text-xs uppercase tracking-widest text-red">
+              {{ author.role }}
             </p>
+            <p class="mt-1 font-mono text-xs text-ink-soft">{{ author.university }}</p>
           </div>
         </div>
 
-        <div class="prose-bauhaus mt-7 max-w-2xl">
+        <hr class="my-6 rule-heavy" />
+
+        <div class="prose-bauhaus max-w-2xl">
           <p v-for="(para, i) in author.bio" :key="i">{{ para }}</p>
         </div>
 
@@ -44,7 +45,7 @@ import { author, supervisor } from '../data/site.js'
             </span>
           </div>
         </div>
-      </div>
+      </article>
 
       <!-- supervisor -->
       <aside v-reveal="120" class="self-start border-2 border-ink bg-paper-2 p-6 sm:p-8">
@@ -53,16 +54,24 @@ import { author, supervisor } from '../data/site.js'
           <BauhausMark :size="28" />
         </div>
 
-        <h3 class="mt-6 font-display text-2xl font-bold leading-tight tracking-tight text-ink">
-          {{ supervisor.name }}
-        </h3>
-        <p class="mt-1 font-mono text-xs uppercase tracking-widest text-blue">
-          {{ supervisor.role }}
-        </p>
+        <div class="mt-6 flex flex-col gap-6 sm:flex-row sm:items-end">
+          <PortraitBlock :file="supervisor.photo" :alt="supervisor.name" accent="blue" />
+          <div>
+            <h3 class="font-display text-2xl font-bold leading-tight tracking-tight text-ink">
+              {{ supervisor.name }}
+            </h3>
+            <p class="mt-1 font-mono text-xs uppercase tracking-widest text-blue">
+              {{ supervisor.role }}
+            </p>
+            <p class="mt-1 font-mono text-xs text-ink-soft">{{ supervisor.title }}</p>
+          </div>
+        </div>
 
-        <hr class="my-5 rule-heavy" />
+        <hr class="my-6 rule-heavy" />
 
-        <p class="leading-relaxed text-ink-soft">{{ supervisor.note }}</p>
+        <div class="space-y-4 leading-relaxed text-ink-soft">
+          <p v-for="(para, i) in supervisor.bio" :key="i">{{ para }}</p>
+        </div>
 
         <p class="mt-6 font-mono text-xs text-ink-soft">
           <span class="text-ink">Institution</span><br />{{ supervisor.university }}

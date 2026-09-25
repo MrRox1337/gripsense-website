@@ -15,7 +15,7 @@ const accentBg = {
   <section id="files" class="bg-paper-2/60">
     <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 md:py-28">
       <SectionHeader
-        index="04"
+        index="05"
         kicker="Deliverables & resources"
         title="Files"
         accent="ink"

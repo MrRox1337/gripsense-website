@@ -13,14 +13,17 @@ export const site = {
 };
 
 export const author = {
-  name: "Aman",
+  name: "Aman Mishra",
   studentId: "M00983641",
   role: "MSc Robotics Candidate",
   university: "Middlesex University Dubai",
-  // Placeholder bio — rewrite freely.
+  // Portrait: drop this file into ../Progress/images/ to replace the placeholder.
+  photo: "about-aman.jpg",
   bio: [
-    "I am a robotics postgraduate at Middlesex University Dubai working at the intersection of mechatronic design, embedded sensing and control. My dissertation extends the Picker-Bot — a pick-and-place robot that so far has only lived in simulation — toward reliable real-world deployment.",
-    "The core of this work is a “smart”, object-in-hand aware universal gripper: an end-effector that can tell, from its own actuation and sensing, whether it is actually holding a component. My focus is on manipulating delicate microelectronic modules — PCBs, microcontrollers, sensors and actuators — without damaging them.",
+    "Aman is a full-time university lecturer and laboratory assistant and an MSc Robotics student based in Dubai, bringing a global perspective shaped by eight years of living and studying in countries with varying cultural backgrounds. He is passionate about bridging the gap between theoretical electronics and practical, autonomous robotic systems, both in the lab and in the classroom.",
+    "Currently, Aman assists with microelectronics and IoT modules and labs, guiding the next generation of engineers while actively shaping his university’s research ecosystem. He recently spearheaded the redevelopment of his facility, the STARS Lab (Space Telecommunications, Automation, Robotics, and Systems), and frequently facilitates strategic industry-academic partnerships.",
+    "Aman’s primary research and technical development focus is on mobile and industrial robotics with spatial awareness. For his Master’s thesis, Aman is developing a smart end effector with object-in-hand verification for democratizing tactile end effectors.",
+    "Aman also has a strong interest in digital design optimization, 3D printing, and laser engraving.",
   ],
   focus: ["Mechatronic design", "Embedded sensing", "Robotic manipulation", "Control systems"],
 };
@@ -28,8 +31,21 @@ export const author = {
 export const supervisor = {
   name: "Dr. Judhi Prasetyo",
   role: "Dissertation Supervisor",
+  title: "Senior Lecturer · Head & Founder, STARS Lab",
   university: "Middlesex University Dubai",
-  note: "Guiding the project on design direction, actuator selection and grip-feedback strategy through weekly supervision meetings.",
+  // Portrait: drop this file into ../Progress/images/ to replace the placeholder.
+  photo: "about-supervisor.jpg",
+  bio: [
+    "Dr. Judhi Prasetyo, Senior Lecturer, Head & Founder of the STARS Lab at Middlesex University Dubai is a Dubai-based lecturer, researcher and information and communication technology entrepreneur. For the past three decades, Judhi has been providing professional services to various verticals including government entities and law enforcement agencies in more than 15 countries.",
+    "He holds Engineering Degree in Electronics and Electrical Engineering from National Institute of Technology of Bandung Indonesia, Master of Science in Engineering Management with major in Supply Chain Management from Middlesex University, and PhD in Computer Science with major in Robotics from Universite de Namur, Belgium.",
+    "His special interest is in using technology for socially responsible activities to improve the quality of life. Judhi conducts lectures, workshops and mentoring of computer electronics focusing on IoT and robotics for university students and general public. He also involved in various industry activities.",
+  ],
+};
+
+/* Project plan (Gantt chart) — drop this file into ../Progress/images/. */
+export const projectPlan = {
+  image: "project-gantt-chart.jpg",
+  caption: "Project Gantt chart — planned schedule of dissertation work packages and milestones.",
 };
 
 /* Resource links — swap the "#" for your real URLs when ready. */
@@ -85,6 +101,7 @@ export const navLinks = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
   { id: "blog", label: "Research Log" },
+  { id: "plan", label: "Plan" },
   { id: "meetings", label: "Meetings" },
   { id: "files", label: "Files" },
   { id: "contact", label: "Contact" },

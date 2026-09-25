@@ -3,6 +3,7 @@ import SiteNav from './components/SiteNav.vue'
 import HeroSection from './components/HeroSection.vue'
 import AboutSection from './components/AboutSection.vue'
 import BlogSection from './components/BlogSection.vue'
+import PlanSection from './components/PlanSection.vue'
 import MeetingsSection from './components/MeetingsSection.vue'
 import FilesSection from './components/FilesSection.vue'
 import ContactSection from './components/ContactSection.vue'
@@ -14,6 +15,7 @@ import ContactSection from './components/ContactSection.vue'
     <HeroSection />
     <AboutSection />
     <BlogSection />
+    <PlanSection />
     <MeetingsSection />
     <FilesSection />
   </main>
