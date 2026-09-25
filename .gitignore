@@ -30,3 +30,4 @@ LaTeX Dissertation/
 # Note: Progress/ and website/ are intentionally NOT ignored — the site is
 # built from them. Bibliography files (citations.bib, weblinks.bib) are small
 # and harmless, so they are left in.
+progress.md
