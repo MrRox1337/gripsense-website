@@ -14,8 +14,8 @@ import ContactSection from './components/ContactSection.vue'
   <main>
     <HeroSection />
     <AboutSection />
-    <BlogSection />
     <PlanSection />
+    <BlogSection />
     <MeetingsSection />
     <FilesSection />
   </main>

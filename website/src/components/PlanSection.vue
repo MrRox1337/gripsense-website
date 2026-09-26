@@ -7,7 +7,7 @@ import { projectPlan } from '../data/site.js'
 
 <template>
   <section id="plan" class="mx-auto max-w-7xl px-5 py-20 sm:px-8 md:py-28">
-    <SectionHeader index="03" kicker="Timeline" title="Project Plan" accent="red" />
+    <SectionHeader index="02" kicker="Timeline" title="Project Plan" accent="red" />
 
     <p class="-mt-6 mb-4 max-w-2xl font-mono text-sm text-ink-soft">
       Gantt chart of the dissertation schedule.

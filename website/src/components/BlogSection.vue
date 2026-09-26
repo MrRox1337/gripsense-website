@@ -30,7 +30,7 @@ onBeforeUnmount(() => window.removeEventListener('hashchange', expandFromHash))
   <section id="blog" class="bg-paper-2/60">
     <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 md:py-28">
       <SectionHeader
-        index="02"
+        index="03"
         kicker="Weekly progress"
         title="Research Log"
         accent="red"

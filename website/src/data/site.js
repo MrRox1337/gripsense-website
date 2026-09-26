@@ -100,8 +100,8 @@ export const contact = [
 export const navLinks = [
   { id: "home", label: "Home" },
   { id: "about", label: "About" },
-  { id: "blog", label: "Research Log" },
   { id: "plan", label: "Plan" },
+  { id: "blog", label: "Research Log" },
   { id: "meetings", label: "Meetings" },
   { id: "files", label: "Files" },
   { id: "contact", label: "Contact" },
