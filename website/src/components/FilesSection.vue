@@ -1,25 +1,20 @@
 <script setup>
-import SectionHeader from './SectionHeader.vue'
-import { reveal as vReveal } from '../directives/reveal.js'
-import { files } from '../data/site.js'
+import SectionHeader from "./SectionHeader.vue";
+import { reveal as vReveal } from "../directives/reveal.js";
+import { files } from "../data/site.js";
 
 const accentBg = {
-  red: 'bg-red text-paper',
-  blue: 'bg-blue text-paper',
-  yellow: 'bg-yellow text-ink',
-  ink: 'bg-ink text-paper',
-}
+  red: "bg-red text-paper",
+  blue: "bg-blue text-paper",
+  yellow: "bg-yellow text-ink",
+  ink: "bg-ink text-paper",
+};
 </script>
 
 <template>
   <section id="files" class="bg-paper-2/60">
     <div class="mx-auto max-w-7xl px-5 py-20 sm:px-8 md:py-28">
-      <SectionHeader
-        index="05"
-        kicker="Deliverables & resources"
-        title="Files"
-        accent="ink"
-      />
+      <SectionHeader index="05" kicker="Deliverables & resources" title="Files" accent="ink" />
 
       <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         <a
@@ -36,7 +31,7 @@ const accentBg = {
               :class="accentBg[f.accent]"
               class="flex h-11 w-11 items-center justify-center font-display text-lg font-bold"
             >
-              {{ String(i + 1).padStart(2, '0') }}
+              {{ String(i + 1).padStart(2, "0") }}
             </span>
             <span
               class="text-2xl text-ink transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1"
@@ -52,11 +47,6 @@ const accentBg = {
           </div>
         </a>
       </div>
-
-      <p class="mt-8 font-mono text-xs text-ink-soft">
-        * Links currently point to placeholders — set real URLs in
-        <span class="text-ink">src/data/site.js</span>.
-      </p>
     </div>
   </section>
 </template>
