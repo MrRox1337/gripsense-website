@@ -82,7 +82,7 @@ export const files = [
     key: "video",
     title: "Demonstration Video",
     desc: "The gripper in action.",
-    url: "#",
+    url: "https://youtu.be/ScccMYvOzOU",
     accent: "ink",
   },
 ];
