@@ -15,31 +15,32 @@
    ============================================================================ */
 
 // Raw text of every progress file, inlined at build time.
-const txtModules = import.meta.glob('../../Progress/*.txt', {
-  query: '?raw',
-  import: 'default',
+const txtModules = import.meta.glob("../../Progress/*.txt", {
+  query: "?raw",
+  import: "default",
   eager: true,
-})
+});
 
 // Every image the student has dropped into ../Progress/images (may be empty).
-const imageModules = import.meta.glob(
-  '../../Progress/images/*.{png,jpg,jpeg,webp,gif,svg,avif}',
-  { query: '?url', import: 'default', eager: true },
-)
+const imageModules = import.meta.glob("../../Progress/images/*.{png,jpg,jpeg,webp,gif,svg,avif}", {
+  query: "?url",
+  import: "default",
+  eager: true,
+});
 
 // basename("../../Progress/Week_1.txt") -> "Week_1.txt"
-const basename = (p) => p.split('/').pop()
+const basename = (p) => p.split("/").pop();
 
 // Map of lowercased image filename -> resolved URL, for figure resolution.
-const imageMap = {}
+const imageMap = {};
 for (const [path, url] of Object.entries(imageModules)) {
-  imageMap[basename(path).toLowerCase()] = url
+  imageMap[basename(path).toLowerCase()] = url;
 }
 
 /** Resolve a suggested figure filename to a real URL, or null if not present. */
 export function resolveImage(filename) {
-  if (!filename) return null
-  return imageMap[filename.toLowerCase()] || null
+  if (!filename) return null;
+  return imageMap[filename.toLowerCase()] || null;
 }
 
 /* ---------------------------------------------------------------------------
@@ -47,333 +48,320 @@ export function resolveImage(filename) {
    Keys are the generated post id: "week-1", "meeting-2", …
    --------------------------------------------------------------------------- */
 const CURATED = {
-  'week-1': {
-    title: 'Surveying the Gripper Landscape',
-    tags: ['Literature', 'End-effectors', 'Selection'],
+  "week-1": {
+    title: "Surveying the Gripper Landscape",
+    tags: ["Literature", "End-effectors", "Selection"],
     figures: [
       {
         after: 1,
-        file: 'week-1-grippers.jpg',
-        caption:
-          'Vacuum and capillary-force grippers meeting the irregular topology of microelectronic modules.',
+        file: "week-1-grippers.jpg",
+        caption: "Vacuum and capillary-force grippers meeting the irregular topology of microelectronic modules.",
       },
       {
         after: 4,
-        file: 'week-1-taxonomy.jpg',
-        caption:
-          'Taxonomy of electric end-effectors — narrowing the field to parallel and wide grippers.',
+        file: "week-1-taxonomy.jpg",
+        caption: "Taxonomy of electric end-effectors — narrowing the field to parallel and wide grippers.",
       },
     ],
   },
-  'week-2': {
-    title: 'Choosing Actuators That Can Feel',
-    tags: ['Actuators', 'Sensors', 'TMC2209'],
+  "week-2": {
+    title: "Choosing Actuators That Can Feel",
+    tags: ["Actuators", "Sensors", "TMC2209"],
     figures: [
       {
         after: 1,
-        file: 'week-2-servos.jpg',
-        caption:
-          'Hobby servo actuators (MG996R, MG90S, SG90) driven over PWM — limited native feedback.',
+        file: "week-2-servos.jpg",
+        caption: "Hobby servo actuators (MG996R, MG90S, SG90) driven over PWM — limited native feedback.",
       },
       {
         after: 4,
-        file: 'week-2-pd-stepper.jpg',
+        file: "week-2-pd-stepper.jpg",
         caption:
-          'SparkFun PD Stepper (ROB-30118): a TMC2209 driver paired with a magnetic encoder for reliable in-hand sensing.',
+          "SparkFun PD Stepper (ROB-30118): a TMC2209 driver paired with a magnetic encoder for reliable in-hand sensing.",
       },
     ],
   },
-  'week-3': {
-    title: 'A Design Brief Takes Shape',
-    tags: ['Design Brief', 'Requirements'],
+  "week-3": {
+    title: "A Design Brief Takes Shape",
+    tags: ["Design Brief", "Requirements"],
     figures: [
       {
         after: 1,
-        file: 'week-3-brief.jpg',
-        caption:
-          'The emerging brief — a light, fast-acting gripper with genuine object-in-hand sensitivity.',
+        file: "week-3-brief.jpg",
+        caption: "The emerging brief — a light, fast-acting gripper with genuine object-in-hand sensitivity.",
       },
     ],
   },
-  'meeting-1': {
-    title: 'Framing the Problem',
-    tags: ['Scope', 'PCB handling', 'Real-world deployment'],
+  "meeting-1": {
+    title: "Framing the Problem",
+    tags: ["Scope", "PCB handling", "Real-world deployment"],
   },
-  'meeting-2': {
-    title: 'From Driver to Design',
-    tags: ['PD Stepper', 'NEMA17', 'Backdrivability'],
+  "meeting-2": {
+    title: "From Driver to Design",
+    tags: ["PD Stepper", "NEMA17", "Backdrivability"],
   },
-  'week-4': {
-    title: 'Modelling the Wide Servo Gripper',
-    tags: ['Onshape CAD', 'Dynamixel', 'Interference analysis'],
+  "week-4": {
+    title: "Modelling the Wide Servo Gripper",
+    tags: ["Onshape CAD", "Dynamixel", "Interference analysis"],
     figures: [
       {
         after: 1,
-        file: 'week-4-dynamixel-onshape.jpg',
+        file: "week-4-dynamixel-onshape.jpg",
         caption:
-          'Dynamixel XM430-W210-T STEP model imported into Onshape, with mates redefined to extract reference dimensions.',
+          "Dynamixel XM430-W210-T STEP model imported into Onshape, with mates redefined to extract reference dimensions.",
       },
       {
         after: 2,
-        file: 'week-4-wide-gripper.jpg',
-        caption:
-          'The wide servo gripper assembly — interference analysis exposes a maximum grip width of only ~30 mm.',
+        file: "week-4-wide-gripper.jpg",
+        caption: "The wide servo gripper assembly — interference analysis exposes a maximum grip width of only ~30 mm.",
       },
     ],
   },
-  'week-5': {
-    title: 'Pivoting to the Parallel Gripper',
-    tags: ['Parallel gripper', 'Rack & pinion', '3D printing'],
+  "week-5": {
+    title: "Pivoting to the Parallel Gripper",
+    tags: ["Parallel gripper", "Rack & pinion", "3D printing"],
     figures: [
       {
         after: 3,
-        file: 'week-5-parallel-gripper.jpg',
+        file: "week-5-parallel-gripper.jpg",
         caption:
-          'Parallel gripper built on a rack-and-pinion with custom anti-derail rails and ribbed fingers — backdrivability retained for in-hand sensing.',
+          "Parallel gripper built on a rack-and-pinion with custom anti-derail rails and ribbed fingers — backdrivability retained for in-hand sensing.",
       },
       {
         after: 4,
-        file: 'week-5-first-print.jpg',
-        caption: 'The first iteration of the parallel gripper going onto the 3D printer.',
+        file: "week-5-first-print.jpg",
+        caption: "The first iteration of the parallel gripper going onto the 3D printer.",
       },
     ],
   },
-  'meeting-3': {
-    title: 'Settling on Smart Servos',
-    tags: ['Dynamixel XM430', 'U2D2', 'Actuation'],
+  "meeting-3": {
+    title: "Settling on Smart Servos",
+    tags: ["Dynamixel XM430", "U2D2", "Actuation"],
   },
-  'meeting-4': {
-    title: 'The Moving Tool-Centre-Point',
-    tags: ['Variable TCP', 'Grip width', 'Kinematics'],
+  "meeting-4": {
+    title: "The Moving Tool-Centre-Point",
+    tags: ["Variable TCP", "Grip width", "Kinematics"],
   },
-  'meeting-5': {
-    title: 'Finding the Thesis Focus',
-    tags: ['Design trade-offs', 'Documentation', 'Lit review'],
+  "meeting-5": {
+    title: "Finding the Thesis Focus",
+    tags: ["Design trade-offs", "Documentation", "Lit review"],
   },
-  'meeting-6': {
-    title: 'Measuring the Grip',
-    tags: ['Enclosure design', 'Grip evaluation', 'Sensor selection'],
+  "meeting-6": {
+    title: "Measuring the Grip",
+    tags: ["Enclosure design", "Grip evaluation", "Sensor selection"],
   },
-  'week-6': {
-    title: 'A Kitchen Scale for Grip Strength',
-    tags: ['Enclosure v2', 'Strain gauge', 'Dynamixel Wizard'],
+  "week-6": {
+    title: "A Kitchen Scale for Grip Strength",
+    tags: ["Enclosure v2", "Strain gauge", "Dynamixel Wizard"],
     figures: [
       {
         after: 1,
-        file: 'week-6-enclosure-v2.jpg',
-        caption:
-          'Version 2 of the rack-and-pinion enclosure, modelled around the XM430-W210-T actuator.',
+        file: "week-6-enclosure-v2.jpg",
+        caption: "Version 2 of the rack-and-pinion enclosure, modelled around the XM430-W210-T actuator.",
       },
       {
         after: 3,
-        file: 'week-6-strain-gauge.jpg',
-        caption:
-          'A kitchen weight scale — a ready-made strain gauge — repurposed as the grip-strength evaluation rig.',
+        file: "week-6-strain-gauge.jpg",
+        caption: "A kitchen weight scale — a ready-made strain gauge — repurposed as the grip-strength evaluation rig.",
       },
     ],
   },
-  'week-7': {
-    title: 'Testing GripSense to Failure',
-    tags: ['U2D2 testing', 'Grip strength', 'Filament trials'],
+  "week-7": {
+    title: "Testing GripSense to Failure",
+    tags: ["U2D2 testing", "Grip strength", "Filament trials"],
     figures: [
-      {
-        after: 2,
-        file: 'week-7-grip-test.jpg',
-        caption:
-          'Current-limited grip-strength testing on the scale — up to ~1.5 kg before a PETG finger snapped.',
-      },
       {
         after: 4,
-        file: 'week-7-material-fingers.jpg',
-        caption: 'Fingers printed in PETG, PLA, ABS and TPU for a material-robustness comparison.',
+        file: "week-7-material-fingers.jpg",
+        caption: "Fingers printed in PETG, PLA, ABS and TPU for a material-robustness comparison.",
       },
     ],
   },
-  'week-8': {
-    title: 'Mounting GripSense to the VT6',
-    tags: ['Enclosure v3', 'Epson VT6', 'EoAT mounting'],
+  "week-8": {
+    title: "Mounting GripSense to the VT6",
+    tags: ["Enclosure v3", "Epson VT6", "EoAT mounting"],
     figures: [
       {
         after: 2,
-        file: 'week-8-vt6-mounted.jpg',
+        file: "week-8-vt6-mounted.jpg",
         caption:
-          'The third and final enclosure, printed in PLA and mounted on the Epson VT6-A901S — ready for data collection.',
+          "The third and final enclosure, printed in PLA and mounted on the Epson VT6-A901S — ready for data collection.",
       },
     ],
   },
-  'meeting-7': {
-    title: 'A Metric Under Scrutiny',
-    tags: ['Evaluation metric', 'Custom script', 'End-of-arm tooling'],
+  "meeting-7": {
+    title: "A Metric Under Scrutiny",
+    tags: ["Evaluation metric", "Custom script", "End-of-arm tooling"],
   },
-  'meeting-8': {
-    title: 'Stop Designing, Start Collecting',
-    tags: ['Data collection', 'Reliability', 'Focus'],
+  "meeting-8": {
+    title: "Stop Designing, Start Collecting",
+    tags: ["Data collection", "Reliability", "Focus"],
   },
-  'week-9': {
-    title: 'Automating the Grip-and-Slip Benchmark',
-    tags: ['Dynamixel SDK', 'Benchmark GUI', 'Slip detection', 'Calibration'],
+  "week-9": {
+    title: "Automating the Grip-and-Slip Benchmark",
+    tags: ["Dynamixel SDK", "Benchmark GUI", "Slip detection", "Calibration"],
     figures: [
       {
         after: 5,
-        file: 'week-9-control-gui.jpg',
+        file: "week-9-control-gui.jpg",
         caption:
-          'The manual control GUI — position, goal-current and profile-velocity sliders that prime the gripper to maximum open before the first torque command.',
+          "The manual control GUI — position, goal-current and profile-velocity sliders that prime the gripper to maximum open before the first torque command.",
       },
       {
         after: 10,
-        file: 'week-9-benchmark-gui.jpg',
+        file: "week-9-benchmark-gui.jpg",
         caption:
-          'The benchmark GUI presents the trials as a 4×4 grid that locks out completed material×padding combinations and reports overall progress.',
+          "The benchmark GUI presents the trials as a 4×4 grid that locks out completed material×padding combinations and reports overall progress.",
       },
       {
         after: 22,
-        file: 'week-9-architecture.jpg',
+        file: "week-9-architecture.jpg",
         caption:
-          'The software architecture, documented with Mermaid diagrams: control flow, data flow, the run-time threading model, the calibration sequence and the slip-decision rule.',
+          "The software architecture, documented with Mermaid diagrams: control flow, data flow, the run-time threading model, the calibration sequence and the slip-decision rule.",
       },
     ],
   },
-  'meeting-9': {
-    title: 'Force Closure Before Padding',
-    tags: ['Preliminary results', 'Force closure', 'Material ranking'],
+  "meeting-9": {
+    title: "Force Closure Before Padding",
+    tags: ["Preliminary results", "Force closure", "Material ranking"],
   },
-  'week-10': {
-    title: 'Running the Benchmark, Confronting the Slip Detector',
-    tags: ['Force closure', 'Slip detection', 'Benchmark rig'],
+  "week-10": {
+    title: "Running the Benchmark, Confronting the Slip Detector",
+    tags: ["Force closure", "Slip detection", "Benchmark rig"],
     figures: [
       {
         after: 2,
-        file: 'week-10-test-object.jpg',
+        file: "week-10-test-object.jpg",
         caption:
-          'A 40mm PCB ruler chosen as the standard test object: it fits every finger set’s calibrated travel and has a flat, rigid edge, at the cost of conditioning every reading on a single geometry.',
+          "A 40mm PCB ruler chosen as the standard test object: it fits every finger set’s calibrated travel and has a flat, rigid edge, at the cost of conditioning every reading on a single geometry.",
       },
       {
         after: 7,
-        file: 'week-10-slip-detector.jpg',
+        file: "week-10-slip-detector.jpg",
         caption:
-          'The slip detector after three rounds of hardening: a 20-sample settled baseline, a three-sample confirmation window timestamped to the first drop, and a guard against a degenerate threshold going silent.',
+          "The slip detector after three rounds of hardening: a 20-sample settled baseline, a three-sample confirmation window timestamped to the first drop, and a guard against a degenerate threshold going silent.",
       },
     ],
   },
-  'week-11': {
-    title: 'Recovering, Not Building',
-    tags: ['Recovery', 'Pause'],
+  "week-11": {
+    title: "Recovering, Not Building",
+    tags: ["Recovery", "Pause"],
   },
-  'meeting-10': {
-    title: 'Skipping With Nothing to Show',
-    tags: ['Skipped meeting', 'Recovery'],
+  "meeting-10": {
+    title: "Skipping With Nothing to Show",
+    tags: ["Skipped meeting", "Recovery"],
   },
-  'meeting-11': {
-    title: 'A Second Missed Meeting',
-    tags: ['Skipped meeting', 'Recovery'],
+  "meeting-11": {
+    title: "A Second Missed Meeting",
+    tags: ["Skipped meeting", "Recovery"],
   },
-  'week-12': {
-    title: 'Turning Scripts Into a GripperAPI',
-    tags: ['GripperAPI', 'Refactor', 'Bug fix'],
+  "week-12": {
+    title: "Turning Scripts Into a GripperAPI",
+    tags: ["GripperAPI", "Refactor", "Bug fix"],
     figures: [
       {
         after: 2,
-        file: 'week-12-api-surface.jpg',
+        file: "week-12-api-surface.jpg",
         caption:
-          'The abstracted GripperAPI surface: enable, open/close/hold, and a polled status — idle, moving, ok, slip, or miss — hiding the control tables and register addresses beneath it.',
+          "The abstracted GripperAPI surface: enable, open/close/hold, and a polled status — idle, moving, ok, slip, or miss — hiding the control tables and register addresses beneath it.",
       },
       {
         after: 5,
-        file: 'week-12-third-party-test.jpg',
+        file: "week-12-third-party-test.jpg",
         caption:
-          'A third-party import test: someone outside the project initialised the API against the config, limits and control-table YAML files and operated the gripper without reading the driver code.',
+          "A third-party import test: someone outside the project initialised the API against the config, limits and control-table YAML files and operated the gripper without reading the driver code.",
       },
     ],
   },
-  'meeting-12': {
-    title: 'What Is This Paper Actually About?',
-    tags: ['Picker-Bot', 'Scope check', 'Grip & slip metrics'],
+  "meeting-12": {
+    title: "What Is This Paper Actually About?",
+    tags: ["Picker-Bot", "Scope check", "Grip & slip metrics"],
   },
-  'week-13': {
-    title: 'Chasing the Last Data Points, Fighting ABS',
-    tags: ['benchmark_params.yaml', 'Recalibration', 'ABS failures'],
+  "week-13": {
+    title: "Chasing the Last Data Points, Fighting ABS",
+    tags: ["benchmark_params.yaml", "Recalibration", "ABS failures"],
     figures: [
       {
         after: 2,
-        file: 'week-13-benchmark-yaml.jpg',
+        file: "week-13-benchmark-yaml.jpg",
         caption:
-          'The experiment matrix lifted into a single benchmark_params.yaml — materials, paddings, current levels and repeat count, redefinable without touching code.',
+          "The experiment matrix lifted into a single benchmark_params.yaml — materials, paddings, current levels and repeat count, redefinable without touching code.",
       },
       {
         after: 4,
-        file: 'week-13-abs-failure.jpg',
+        file: "week-13-abs-failure.jpg",
         caption:
-          'The ABS finger set after its third collapse mid data-collection — superglued back together each time before finally giving out on the eraser-padding cell.',
+          "The ABS finger set after its third collapse mid data-collection — superglued back together each time before finally giving out on the eraser-padding cell.",
       },
     ],
   },
-  'meeting-13': {
-    title: 'Two Papers in One Trenchcoat',
-    tags: ['Pivot decision', 'Related work', 'Scope commitment'],
+  "meeting-13": {
+    title: "Two Papers in One Trenchcoat",
+    tags: ["Pivot decision", "Related work", "Scope commitment"],
   },
-  'week-14': {
-    title: 'Splitting the Repository, Hardening the API',
-    tags: ['Branch split', 'Watchdog thread', 'Package refactor'],
+  "week-14": {
+    title: "Splitting the Repository, Hardening the API",
+    tags: ["Branch split", "Watchdog thread", "Package refactor"],
     figures: [
       {
         after: 1,
-        file: 'week-14-branch-split.jpg',
+        file: "week-14-branch-split.jpg",
         caption:
-          'The benchmarking campaign forked onto its own branch from the shared commit — nothing lost, but `main` now builds toward the control software alone.',
+          "The benchmarking campaign forked onto its own branch from the shared commit — nothing lost, but `main` now builds toward the control software alone.",
       },
       {
         after: 4,
-        file: 'week-14-watchdog.jpg',
+        file: "week-14-watchdog.jpg",
         caption:
-          'The watchdog Dr. Judhi asked for: a background monitor sampling current at the slip rate while holding, standing down for blocking moves, so reading the status costs no bus round trip.',
+          "The watchdog Dr. Judhi asked for: a background monitor sampling current at the slip rate while holding, standing down for blocking moves, so reading the status costs no bus round trip.",
       },
       {
         after: 5,
-        file: 'week-14-teleop-console.jpg',
+        file: "week-14-teleop-console.jpg",
         caption:
-          'The manual console after moving inside the package as `api.teleop()` — sliders and calibration wizard now ship to anyone who installs `dynamixel_gripper`.',
+          "The manual console after moving inside the package as `api.teleop()` — sliders and calibration wizard now ship to anyone who installs `dynamixel_gripper`.",
       },
     ],
   },
-  'week-15': {
-    title: 'The First Numbers Worth Reporting',
-    tags: ['Status accuracy', 'Opening linearity', 'Paper drafting'],
+  "week-15": {
+    title: "The First Numbers Worth Reporting",
+    tags: ["Status accuracy", "Opening linearity", "Paper drafting"],
     figures: [
       {
         after: 2,
-        file: 'week-15-status-matrix.jpg',
+        file: "week-15-status-matrix.jpg",
         caption:
-          'Status-accuracy confusion matrix: 120 trials, 40 each of ok, miss and slip, with no misclassifications — strong evidence for the classification logic, on a single hardware unit.',
+          "Status-accuracy confusion matrix: 120 trials, 40 each of ok, miss and slip, with no misclassifications — strong evidence for the classification logic, on a single hardware unit.",
       },
       {
         after: 3,
-        file: 'week-15-opening-linearity.jpg',
+        file: "week-15-opening-linearity.jpg",
         caption:
-          'Caliper readings scattered against commanded opening after the mis-recorded 75% point was corrected — near-perfect tracking, with a small repeatable backlash bias at the smallest opening.',
+          "Caliper readings scattered against commanded opening after the mis-recorded 75% point was corrected — near-perfect tracking, with a small repeatable backlash bias at the smallest opening.",
       },
     ],
   },
-  'week-16': {
-    title: 'Switching to the Writeup',
-    tags: ['Paper draft', 'Requirements', 'Actuation selection'],
+  "week-16": {
+    title: "Switching to the Writeup",
+    tags: ["Paper draft", "Requirements", "Actuation selection"],
     figures: [
       {
         after: 3,
-        file: 'week-16-actuation-table.jpg',
+        file: "week-16-actuation-table.jpg",
         caption:
-          'The Actuation Comparison table — actuator classes transposed to rows so the elimination argument fits a single IEEE column instead of spanning both.',
+          "The Actuation Comparison table — actuator classes transposed to rows so the elimination argument fits a single IEEE column instead of spanning both.",
       },
     ],
   },
-  'meeting-14': {
-    title: 'Branch It, Normalize It, Watch It',
-    tags: ['Scope commitment', 'API design', 'Watchdog'],
+  "meeting-14": {
+    title: "Branch It, Normalize It, Watch It",
+    tags: ["Scope commitment", "API design", "Watchdog"],
   },
-  'meeting-15': {
-    title: 'A Test Plan, Agreed',
-    tags: ['Test plan', 'Validation', 'Wrapping up'],
+  "meeting-15": {
+    title: "A Test Plan, Agreed",
+    tags: ["Test plan", "Validation", "Wrapping up"],
   },
-}
+};
 
 /* ---------------------------------------------------------------------------
    Inline formatting — escapes HTML and prettifies BibTeX-style citation keys
@@ -383,38 +371,31 @@ const CURATED = {
    untouched.
    --------------------------------------------------------------------------- */
 function escapeHtml(s) {
-  return s
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 export function formatInline(text) {
-  let s = escapeHtml(text)
+  let s = escapeHtml(text);
 
   // Author-year keys: WadaKentaro2017Pvhr, ItoTakatoshi2022Vfcc
-  s = s.replace(
-    /\b((?:[A-Z][a-z]+){2,})(\d{4})[A-Za-z]*\b/g,
-    (_all, name, year) => {
-      const pretty = name.replace(/([a-z])([A-Z])/g, '$1 $2')
-      return `<cite class="cite">${pretty} <span class="cite-year">(${year})</span></cite>`
-    },
-  )
+  s = s.replace(/\b((?:[A-Z][a-z]+){2,})(\d{4})[A-Za-z]*\b/g, (_all, name, year) => {
+    const pretty = name.replace(/([a-z])([A-Z])/g, "$1 $2");
+    return `<cite class="cite">${pretty} <span class="cite-year">(${year})</span></cite>`;
+  });
 
   // Misc / anonymous keys: _2020_types, _2025_6
   s = s.replace(
     /\b_(\d{4})_([A-Za-z0-9]+)\b/g,
-    (_all, year, tag) =>
-      `<cite class="cite">ref. <span class="cite-year">${year}</span> · ${tag}</cite>`,
-  )
+    (_all, year, tag) => `<cite class="cite">ref. <span class="cite-year">${year}</span> · ${tag}</cite>`,
+  );
 
-  return s
+  return s;
 }
 
 /* ---------------------------------------------------------------------------
    Core parser: raw text -> structured blocks.
    --------------------------------------------------------------------------- */
-const pad2 = (n) => String(n).padStart(2, '0')
+const pad2 = (n) => String(n).padStart(2, "0");
 
 /* ---------------------------------------------------------------------------
    Dates — derived from the schedule, not hand-entered.
@@ -422,161 +403,155 @@ const pad2 = (n) => String(n).padStart(2, '0')
    supervision meeting happens on that week's Thursday. Change WEEK1_MONDAY
    below if the timetable ever shifts, and all dates recompute.
    --------------------------------------------------------------------------- */
-const WEEK1_MONDAY = Date.UTC(2026, 5, 8) // months are 0-indexed: 5 = June
-const DAY_MS = 24 * 60 * 60 * 1000
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-const WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+const WEEK1_MONDAY = Date.UTC(2026, 5, 8); // months are 0-indexed: 5 = June
+const DAY_MS = 24 * 60 * 60 * 1000;
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-const isoOf = (d) => d.toISOString().slice(0, 10)
+const isoOf = (d) => d.toISOString().slice(0, 10);
 
 // Monday (start) of week N.
 function weekStart(n) {
-  return new Date(WEEK1_MONDAY + (n - 1) * 7 * DAY_MS)
+  return new Date(WEEK1_MONDAY + (n - 1) * 7 * DAY_MS);
 }
 
 // A week's Mon–Sun span, e.g. "8–14 Jun 2026" or "29 Jun – 5 Jul 2026".
 function weekSpanLabel(n) {
-  const start = weekStart(n)
-  const end = new Date(start.getTime() + 6 * DAY_MS)
-  const y = end.getUTCFullYear()
+  const start = weekStart(n);
+  const end = new Date(start.getTime() + 6 * DAY_MS);
+  const y = end.getUTCFullYear();
   if (start.getUTCMonth() === end.getUTCMonth()) {
-    return `${start.getUTCDate()}–${end.getUTCDate()} ${MONTHS[start.getUTCMonth()]} ${y}`
+    return `${start.getUTCDate()}–${end.getUTCDate()} ${MONTHS[start.getUTCMonth()]} ${y}`;
   }
   return (
-    `${start.getUTCDate()} ${MONTHS[start.getUTCMonth()]} – ` +
-    `${end.getUTCDate()} ${MONTHS[end.getUTCMonth()]} ${y}`
-  )
+    `${start.getUTCDate()} ${MONTHS[start.getUTCMonth()]} – ` + `${end.getUTCDate()} ${MONTHS[end.getUTCMonth()]} ${y}`
+  );
 }
 
 // The Thursday of week N (meeting day), e.g. "Thu 11 Jun 2026".
 function meetingDay(n) {
-  return new Date(weekStart(n).getTime() + 3 * DAY_MS)
+  return new Date(weekStart(n).getTime() + 3 * DAY_MS);
 }
 function meetingDayLabel(n) {
-  const d = meetingDay(n)
-  return `${WEEKDAYS[d.getUTCDay()]} ${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`
+  const d = meetingDay(n);
+  return `${WEEKDAYS[d.getUTCDay()]} ${d.getUTCDate()} ${MONTHS[d.getUTCMonth()]} ${d.getUTCFullYear()}`;
 }
 
 function parseBlocks(text) {
-  const blocks = []
+  const blocks = [];
   const rawBlocks = text
     .split(/\n\s*\n/)
     .map((b) => b.trim())
-    .filter(Boolean)
+    .filter(Boolean);
 
-  const isBullet = (l) => /^[-*•]\s+/.test(l)
-  const stripBullet = (l) => l.replace(/^[-*•]\s+/, '')
+  const isBullet = (l) => /^[-*•]\s+/.test(l);
+  const stripBullet = (l) => l.replace(/^[-*•]\s+/, "");
 
   for (const b of rawBlocks) {
     const lines = b
-      .split('\n')
+      .split("\n")
       .map((l) => l.trim())
-      .filter(Boolean)
+      .filter(Boolean);
 
-    const firstBullet = lines.findIndex(isBullet)
+    const firstBullet = lines.findIndex(isBullet);
 
     // No bullets at all -> a single re-flowed paragraph.
     if (firstBullet === -1) {
-      blocks.push({ kind: 'para', text: lines.join(' ') })
-      continue
+      blocks.push({ kind: "para", text: lines.join(" ") });
+      continue;
     }
 
     // Any lines before the first bullet form a lead-in paragraph
     // (e.g. "Key topics:" ahead of the list).
-    const lead = lines.slice(0, firstBullet).join(' ').trim()
-    if (lead) blocks.push({ kind: 'para', text: lead })
+    const lead = lines.slice(0, firstBullet).join(" ").trim();
+    if (lead) blocks.push({ kind: "para", text: lead });
 
     // Build list items, folding hard-wrapped continuation lines into the
     // preceding bullet so multi-line bullets stay intact.
-    const items = []
+    const items = [];
     for (const line of lines.slice(firstBullet)) {
       if (isBullet(line)) {
-        items.push(stripBullet(line))
+        items.push(stripBullet(line));
       } else if (items.length) {
-        items[items.length - 1] += ' ' + line
+        items[items.length - 1] += " " + line;
       }
     }
-    blocks.push({ kind: 'list', items })
+    blocks.push({ kind: "list", items });
   }
-  return blocks
+  return blocks;
 }
 
 /** Weave figure placeholders into a week's paragraph blocks. */
 function injectFigures(blocks, id, title) {
-  const curated = CURATED[id]
-  let figures = curated?.figures
+  const curated = CURATED[id];
+  let figures = curated?.figures;
 
   // Auto-figure for uncurated weeks: one placeholder after the first paragraph.
   if (!figures) {
-    const paraCount = blocks.filter((b) => b.kind === 'para').length
-    figures =
-      paraCount >= 2
-        ? [{ after: 1, file: `${id}-fig-1.jpg`, caption: `Figure — ${title}` }]
-        : []
+    const paraCount = blocks.filter((b) => b.kind === "para").length;
+    figures = paraCount >= 2 ? [{ after: 1, file: `${id}-fig-1.jpg`, caption: `Figure — ${title}` }] : [];
   }
 
-  const out = []
-  let paraSeen = 0
-  const remaining = [...figures]
+  const out = [];
+  let paraSeen = 0;
+  const remaining = [...figures];
 
   for (const block of blocks) {
-    out.push(block)
-    if (block.kind === 'para') {
-      paraSeen += 1
+    out.push(block);
+    if (block.kind === "para") {
+      paraSeen += 1;
       while (remaining.length && remaining[0].after === paraSeen) {
-        const f = remaining.shift()
-        out.push({ kind: 'figure', file: f.file, caption: f.caption })
+        const f = remaining.shift();
+        out.push({ kind: "figure", file: f.file, caption: f.caption });
       }
     }
   }
   // Any figures targeting a paragraph beyond the end still get appended.
-  for (const f of remaining) out.push({ kind: 'figure', file: f.file, caption: f.caption })
-  return out
+  for (const f of remaining) out.push({ kind: "figure", file: f.file, caption: f.caption });
+  return out;
 }
 
 function excerptFrom(blocks) {
-  const firstPara = blocks.find((b) => b.kind === 'para')
-  if (!firstPara) return ''
-  const t = firstPara.text
-  if (t.length <= 170) return t
-  return t.slice(0, 170).replace(/\s+\S*$/, '') + '…'
+  const firstPara = blocks.find((b) => b.kind === "para");
+  if (!firstPara) return "";
+  const t = firstPara.text;
+  if (t.length <= 170) return t;
+  return t.slice(0, 170).replace(/\s+\S*$/, "") + "…";
 }
 
 function readingTime(blocks) {
-  const words = blocks
-    .filter((b) => b.kind === 'para')
-    .reduce((n, b) => n + b.text.split(/\s+/).length, 0)
-  return Math.max(1, Math.round(words / 200))
+  const words = blocks.filter((b) => b.kind === "para").reduce((n, b) => n + b.text.split(/\s+/).length, 0);
+  return Math.max(1, Math.round(words / 200));
 }
 
 function parseFile(path, raw) {
-  const filename = basename(path)
-  const m = filename.match(/^(week|meeting)[_\s-]*(\d+)/i)
-  if (!m) return null
+  const filename = basename(path);
+  const m = filename.match(/^(week|meeting)[_\s-]*(\d+)/i);
+  if (!m) return null;
 
-  const type = m[1].toLowerCase() // 'week' | 'meeting'
-  const number = parseInt(m[2], 10)
-  const id = `${type}-${number}`
+  const type = m[1].toLowerCase(); // 'week' | 'meeting'
+  const number = parseInt(m[2], 10);
+  const id = `${type}-${number}`;
 
-  const normalized = raw.replace(/\r\n?/g, '\n')
-  const isDraft = /\/\/\s*todo/i.test(normalized)
+  const normalized = raw.replace(/\r\n?/g, "\n");
+  const isDraft = /\/\/\s*todo/i.test(normalized);
   // Strip author TODO markers from the rendered content.
   const cleaned = normalized
-    .split('\n')
+    .split("\n")
     .filter((l) => !/^\s*\/\/\s*todo/i.test(l))
-    .join('\n')
+    .join("\n");
 
-  let blocks = parseBlocks(cleaned)
-  const curated = CURATED[id] || {}
-  const label = type === 'week' ? `Week ${pad2(number)}` : `Meeting ${pad2(number)}`
-  const title = curated.title || label
-  const tags = curated.tags || (type === 'week' ? ['Progress'] : ['Supervision'])
+  let blocks = parseBlocks(cleaned);
+  const curated = CURATED[id] || {};
+  const label = type === "week" ? `Week ${pad2(number)}` : `Meeting ${pad2(number)}`;
+  const title = curated.title || label;
+  const tags = curated.tags || (type === "week" ? ["Progress"] : ["Supervision"]);
 
-  if (type === 'week') blocks = injectFigures(blocks, id, title)
+  if (type === "week") blocks = injectFigures(blocks, id, title);
 
   // Human-readable date + machine-readable ISO for the <time> element.
-  const dateLabel = type === 'week' ? weekSpanLabel(number) : meetingDayLabel(number)
-  const dateISO = type === 'week' ? isoOf(weekStart(number)) : isoOf(meetingDay(number))
+  const dateLabel = type === "week" ? weekSpanLabel(number) : meetingDayLabel(number);
+  const dateISO = type === "week" ? isoOf(weekStart(number)) : isoOf(meetingDay(number));
 
   return {
     id,
@@ -591,7 +566,7 @@ function parseFile(path, raw) {
     dateISO,
     excerpt: excerptFrom(blocks),
     readingTime: readingTime(blocks),
-  }
+  };
 }
 
 /* ---------------------------------------------------------------------------
@@ -599,19 +574,15 @@ function parseFile(path, raw) {
    --------------------------------------------------------------------------- */
 const allPosts = Object.entries(txtModules)
   .map(([path, raw]) => parseFile(path, raw))
-  .filter(Boolean)
+  .filter(Boolean);
 
-export const weekPosts = allPosts
-  .filter((p) => p.type === 'week')
-  .sort((a, b) => a.number - b.number)
+export const weekPosts = allPosts.filter((p) => p.type === "week").sort((a, b) => a.number - b.number);
 
-export const meetings = allPosts
-  .filter((p) => p.type === 'meeting')
-  .sort((a, b) => a.number - b.number)
+export const meetings = allPosts.filter((p) => p.type === "meeting").sort((a, b) => a.number - b.number);
 
 export const stats = {
   weeks: weekPosts.length,
   meetings: meetings.length,
   // Planned length is 12 weeks; grows automatically if the log ever runs longer.
   totalWeeks: Math.max(12, weekPosts.length),
-}
+};
