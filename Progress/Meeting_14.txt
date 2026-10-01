@@ -4,7 +4,8 @@ since much of what exists right now was built for the benchmarking campaign.
 
 He suggested that I simply branch my repository instead of losing on the previous work
 done. That way I can halt research in that direction and resume material selection when
-the thesis is done.
+the thesis is done. Then I was recommended to mention the branching the branching on my
+website this week so that anyone can view the halted outcomes from it it if needed.
 
 He then guided me to ensure that my API is normalized and that there is a way to directly
 access the device beyond the API translation to ensure similar performance. In addition,
